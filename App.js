@@ -1,24 +1,29 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
+import {createStackNavigator} from '@react-navigation/stack';
+import {NavigationContainer} from '@react-navigation/native';
 
-export default class example extends Component {
-  componentDidMount() {
+import Tabs from './app/navigation/tabs';
+
+const Stack = createStackNavigator();
+
+const App = () => {
+  React.useEffect(() => {
     SplashScreen.hide();
-  }
+  }, []);
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>BEME Home Page</Text>
-      </View>
-    );
-  }
-}
+  return (
+    <NavigationContainer>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}
+        initialRouteName={'Home'}>
+        <Stack.Screen name="Home" component={Tabs} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: 30,
-  },
-});
+export default App;
