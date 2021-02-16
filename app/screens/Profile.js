@@ -1,10 +1,13 @@
 import React from 'react';
 import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import {useTranslation} from 'react-i18next';
 
-const Home = ({navigation}) => {
+const Profile = ({navigation}) => {
+  const {t} = useTranslation();
+
   return (
     <View style={styles.container}>
-      <Text>Profile</Text>
+      <Text>{t('common:profile')}</Text>
     </View>
   );
 };
@@ -28,4 +31,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Home;
+export default Profile;

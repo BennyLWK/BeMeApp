@@ -1,10 +1,16 @@
 import React from 'react';
 import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import '../localization';
+import {useTranslation} from 'react-i18next';
+import LanguageSelector from './LanguageSelector';
 
 const Home = ({navigation}) => {
+  const {t} = useTranslation();
+  console.log(t);
   return (
     <View style={styles.container}>
-      <Text>Home</Text>
+      <LanguageSelector />
+      <Text>{t('homePage:welcome')}</Text>
     </View>
   );
 };
