@@ -4,6 +4,7 @@ import {
   createBottomTabNavigator,
   BottomTabBar,
 } from '@react-navigation/bottom-tabs';
+import {useTranslation} from 'react-i18next';
 
 import {AskDoctor, Discover, Home, Inbox, Profile} from '../screens';
 import {COLORS, FONTS, icons} from '../constants';
@@ -11,6 +12,8 @@ import {COLORS, FONTS, icons} from '../constants';
 const Tab = createBottomTabNavigator();
 
 const Tabs = () => {
+  const {t} = useTranslation();
+
   return (
     <Tab.Navigator
       tabBarOptions={{
@@ -46,7 +49,7 @@ const Tabs = () => {
                   color: focused ? COLORS.primary : COLORS.textTitle,
                   ...FONTS.body5,
                 }}>
-                Home
+                {t('common:home')}
               </Text>
             </View>
           ),
@@ -72,7 +75,7 @@ const Tabs = () => {
                   color: focused ? COLORS.primary : COLORS.textTitle,
                   ...FONTS.body5,
                 }}>
-                Discover
+                {t('common:discover')}
               </Text>
             </View>
           ),
@@ -98,7 +101,7 @@ const Tabs = () => {
                   color: focused ? COLORS.primary : COLORS.textTitle,
                   ...FONTS.body5,
                 }}>
-                Aks Doctor
+                {t('common:askDoctor')}
               </Text>
             </View>
           ),
@@ -124,7 +127,7 @@ const Tabs = () => {
                   color: focused ? COLORS.primary : COLORS.textTitle,
                   ...FONTS.body5,
                 }}>
-                Inbox
+                {t('common:inbox')}
               </Text>
             </View>
           ),
@@ -150,7 +153,7 @@ const Tabs = () => {
                   color: focused ? COLORS.primary : COLORS.textTitle,
                   ...FONTS.body5,
                 }}>
-                My Profile
+                {t('common:profile')}
               </Text>
             </View>
           ),
