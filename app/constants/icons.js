@@ -1,4 +1,6 @@
 const btn_back = require('../assets/icons/btn_back.png');
+
+// Tab
 const home = require('../assets/icons/home.png');
 const home_active = require('../assets/icons/home_active.png');
 const discover = require('../assets/icons/discover.png');
@@ -10,7 +12,58 @@ const inbox_active = require('../assets/icons/inbox_active.png');
 const profile = require('../assets/icons/profile.png');
 const profile_active = require('../assets/icons/profile_active.png');
 
+// Header
+const btn_Menu = require('../assets/icons/btn_menu.png');
+const search = require('../assets/icons/search.png');
+const down_arrow = require('../assets/icons/down_arrow.png');
+
+// ScanEngine
+const threeD = require('../assets/icons/3d.png');
+const face_analysis = require('../assets/icons/face_analysis.png');
+const skin_analysis = require('../assets/icons/skin_analysis.png');
+const star_face = require('../assets/icons/star_face.png');
+
+// Service
+const hyaluronic = require('../assets/icons/hyaluronic.png');
+const face_lift = require('../assets/icons/face_lift.png');
+const breasts = require('../assets/icons/breasts.png');
+const eye = require('../assets/icons/eye.png');
+const nose = require('../assets/icons/nose.png');
+const dental = require('../assets/icons/dental.png');
+const skin = require('../assets/icons/skin.png');
+const fat_filling = require('../assets/icons/fat_filling.png');
+const hair = require('../assets/icons/hair.png');
+const laser_hair = require('../assets/icons/laser_hair.png');
+const ear = require('../assets/icons/ear.png');
+const private_surgery = require('../assets/icons/private_surgery.png');
+const facial = require('../assets/icons/facial.png');
+const body = require('../assets/icons/body.png');
+const lip_surgery = require('../assets/icons/lip_surgery.png');
+const semi_makeup = require('../assets/icons/semi_makeup.png');
+const medical_health = require('../assets/icons/medical_health.png');
+const anti_aging = require('../assets/icons/anti_aging.png');
+const other = require('../assets/icons/other.png');
+
 export default {
+  hyaluronic,
+  face_lift,
+  breasts,
+  eye,
+  nose,
+  dental,
+  skin,
+  fat_filling,
+  hair,
+  laser_hair,
+  ear,
+  private_surgery,
+  facial,
+  body,
+  lip_surgery,
+  semi_makeup,
+  medical_health,
+  anti_aging,
+  other,
   btn_back,
   home,
   home_active,
@@ -22,4 +75,11 @@ export default {
   inbox_active,
   profile,
   profile_active,
+  btn_Menu,
+  search,
+  down_arrow,
+  threeD,
+  face_analysis,
+  skin_analysis,
+  star_face,
 };
