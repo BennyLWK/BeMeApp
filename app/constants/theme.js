@@ -2,8 +2,8 @@ import {Dimensions} from 'react-native';
 const {width, height} = Dimensions.get('window');
 
 export const COLORS = {
-  primary: '#FA690D',
-  secondary: '#FEE8DA',
+  primary: '#FA690D', // Vivid orange
+  secondary: '#FEE8DA', // Light grayish orange
 
   white: '#FFFFFF',
   textTitle: '#232323',
@@ -17,8 +17,9 @@ export const SIZES = {
   // global sizes
   base: 8,
   font: 14,
-  radius: 12,
-  padding: 24,
+  radius: 24,
+  padding: 10,
+  padding2: 12,
 
   // font sizes
   h1: 30,
@@ -42,9 +43,9 @@ export const FONTS = {
     fontSize: SIZES.h1,
     lineHeight: 36,
   },
-  h2: {fontFamily: 'HelveticaNeuBold', fontSize: SIZES.h2, lineHeight: 30},
-  h3: {fontFamily: 'HelveticaNeuBold', fontSize: SIZES.h3, lineHeight: 22},
-  h4: {fontFamily: 'HelveticaNeuBold', fontSize: SIZES.h4, lineHeight: 22},
+  h2: {fontFamily: 'HelveticaNeueBold', fontSize: SIZES.h2, lineHeight: 30},
+  h3: {fontFamily: 'HelveticaNeueBold', fontSize: SIZES.h3, lineHeight: 22},
+  h4: {fontFamily: 'HelveticaNeueBold', fontSize: SIZES.h4, lineHeight: 22},
   body1: {fontFamily: 'HelveticaNeue', fontSize: SIZES.body1, lineHeight: 36},
   body2: {fontFamily: 'HelveticaNeue', fontSize: SIZES.body2, lineHeight: 30},
   body3: {fontFamily: 'HelveticaNeue', fontSize: SIZES.body3, lineHeight: 22},
