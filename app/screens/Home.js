@@ -1,24 +1,33 @@
 import React from 'react';
 import {
   SafeAreaView,
-  ScrollView,
   View,
   Text,
   StyleSheet,
   TouchableOpacity,
   Image,
+  RefreshControl,
   FlatList,
+  Platform,
 } from 'react-native';
-import '../localization';
 import {useTranslation} from 'react-i18next';
-import LanguageSelector from './LanguageSelector';
 
+import '../localization';
+import LanguageSelector from './LanguageSelector';
 import {dummyData, icons, images, SIZES, COLORS, FONTS} from '../constants';
 
 const Home = ({navigation}) => {
   const {t} = useTranslation();
 
   const [selectedCategory, setSelectedCategory] = React.useState(null);
+  const [refreshing, setRefreshing] = React.useState(false);
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 1000);
+  }, []);
 
   // Render
   function renderHeader() {
@@ -29,6 +38,9 @@ const Home = ({navigation}) => {
           style={{
             paddingLeft: SIZES.padding * 2,
             justifyContent: 'center',
+          }}
+          onPress={() => {
+            console.log('location press');
           }}>
           <View
             style={{
@@ -36,7 +48,7 @@ const Home = ({navigation}) => {
             }}>
             <Text
               numberOfLines={1}
-              style={{color: COLORS.textTitle, width: 70, ...FONTS.body3}}>
+              style={{color: COLORS.textTitle, width: 60, ...FONTS.body4}}>
               {t('homePage:malaysia')}
             </Text>
             <Image
@@ -66,6 +78,9 @@ const Home = ({navigation}) => {
               borderRadius: SIZES.radius,
               borderWidth: 1,
               borderColor: COLORS.primary,
+            }}
+            onPress={() => {
+              console.log('Search press');
             }}>
             <View
               style={{
@@ -94,7 +109,7 @@ const Home = ({navigation}) => {
                   borderRadius: SIZES.radius,
                   paddingHorizontal: SIZES.padding,
                 }}>
-                <Text style={{color: COLORS.white, ...FONTS.body3}}>
+                <Text style={{color: COLORS.white, ...FONTS.body5}}>
                   {t('homePage:popular')}
                 </Text>
               </View>
@@ -109,6 +124,9 @@ const Home = ({navigation}) => {
             width: 50,
             paddingRight: SIZES.padding,
             justifyContent: 'center',
+          }}
+          onPress={() => {
+            console.log('Side menu clicked');
           }}>
           <Image
             source={icons.btn_Menu}
@@ -124,12 +142,6 @@ const Home = ({navigation}) => {
   }
 
   function renderService() {
-    const Header = () => (
-      <View style={{marginBottom: SIZES.padding * 2}}>
-        <Text style={{...FONTS.h3}}>Features</Text>
-      </View>
-    );
-
     const renderItem = ({item}) => (
       <TouchableOpacity
         style={{
@@ -137,7 +149,7 @@ const Home = ({navigation}) => {
           width: 80,
           alignItems: 'center',
         }}
-        onPress={() => console.log(item.description)}>
+        onPress={() => console.log(t(item.name))}>
         <View
           style={{
             height: 50,
@@ -163,7 +175,7 @@ const Home = ({navigation}) => {
             color: COLORS.textTitle,
             textAlign: 'center',
             flexWrap: 'wrap',
-            ...FONTS.body5,
+            ...FONTS.body4,
           }}>
           {t(item.name)}
         </Text>
@@ -179,7 +191,7 @@ const Home = ({navigation}) => {
         columnWrapperStyle={{justifyContent: 'space-between'}}
         keyExtractor={(item) => `${item.id}`}
         renderItem={renderItem}
-        style={{backgroundColor: COLORS.white, marginTop: SIZES.padding * 2}}
+        style={{backgroundColor: COLORS.white, marginHorizontal: -10}}
       />
     );
   }
@@ -189,13 +201,11 @@ const Home = ({navigation}) => {
       return (
         <TouchableOpacity
           style={{
-            //paddingBottom: SIZES.padding,
             alignItems: 'center',
             justifyContent: 'center',
             marginRight: SIZES.padding,
-            //...styles.shadow,
           }}
-          onPress={() => console.log(item)}
+          onPress={() => console.log(t(item.name))}
           //onSelectCategory(item)
         >
           <View
@@ -220,7 +230,7 @@ const Home = ({navigation}) => {
               width: 80,
               marginTop: SIZES.padding,
               color: COLORS.subtitle,
-              ...FONTS.body5,
+              ...FONTS.body4,
             }}>
             {t(item.name)}
           </Text>
@@ -229,7 +239,7 @@ const Home = ({navigation}) => {
     };
 
     return (
-      <View style={{backgroundColor: COLORS.base, padding: SIZES.padding}}>
+      <View style={{backgroundColor: COLORS.base}}>
         <FlatList
           data={dummyData.categoryScanEngine}
           horizontal
@@ -243,81 +253,214 @@ const Home = ({navigation}) => {
   }
 
   function renderBanners() {
-    return (
-      <View style={{height: 450, backgroundColor: COLORS.base}}>
-        {/* <View
-          style={{
-            flex: 1,
-            borderBottomLeftRadius: 50,
-            borderBottomRightRadius: 50,
-            backgroundColor: COLORS.white,
-          }}> */}
-        <View
-          style={{
-            marginTop: SIZES.font,
-            marginHorizontal: SIZES.padding,
-          }}>
+    const ImageTextButton = ({customContainerStyle, image, label, onPress}) => {
+      return (
+        <TouchableOpacity
+          style={{flex: 1, ...customContainerStyle}}
+          onPress={onPress}>
           <View
             style={{
-              flexDirection: 'row',
-              height: '88%',
-              marginTop: SIZES.base,
+              width: '100%',
+              height: '100%',
+              borderRadius: SIZES.font,
             }}>
-            <View style={{backgroundColor: COLORS.primary, flex: 1.3}}>
-              <TouchableOpacity
-                style={{flex: 1, marginLeft: SIZES.font}}
-                onPress={() => {
-                  //navigation.navigate('PlantDetail');
-                }}>
-                <Image
-                  source={images.beme_banner}
-                  resizeMode="contain"
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    borderRadius: 20,
-                  }}
-                />
-              </TouchableOpacity>
-            </View>
+            <Image
+              source={image}
+              resizeMode="cover"
+              style={{
+                width: '100%',
+                height: '100%',
+                borderRadius: SIZES.font,
+              }}
+            />
+            <Text
+              style={{
+                ...FONTS.body3,
+                color: COLORS.textTitle,
+                position: 'absolute',
+                top: SIZES.base,
+                left: SIZES.base,
+              }}>
+              {t(label)}
+            </Text>
+          </View>
+        </TouchableOpacity>
+      );
+    };
 
-            <View style={{flex: 1}}>
-              <TouchableOpacity
-                style={{flex: 1}}
-                onPress={() => {
-                  //navigation.navigate('PlantDetail');
-                }}>
-                <Image
-                  source={images.organizations}
-                  resizeMode="contain"
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    borderRadius: 20,
-                  }}
-                />
-              </TouchableOpacity>
+    return (
+      <View style={{height: SIZES.width / 2 - 15 + 160}}>
+        <View
+          style={{
+            flexDirection: 'row',
+            height: '100%',
+          }}>
+          {/* Banner Advertisement */}
+          <View
+            style={{
+              backgroundColor: COLORS.primary,
+              borderRadius: SIZES.font,
+              flex: 1.0,
+            }}>
+            <TouchableOpacity
+              style={{flex: 1}}
+              onPress={() => {
+                navigation.navigate('Discover');
+              }}>
+              <Image
+                source={images.banner1}
+                resizeMode="cover"
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  borderRadius: SIZES.font,
+                }}
+              />
+            </TouchableOpacity>
+          </View>
 
-              <TouchableOpacity
-                style={{flex: 1, marginTop: SIZES.font}}
-                onPress={() => {
-                  //navigation.navigate('PlantDetail');
-                }}>
-                <Image
-                  source={images.elite_doctor}
-                  resizeMode="contain"
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    borderRadius: 20,
-                  }}
-                />
-              </TouchableOpacity>
-            </View>
+          {/* Right View */}
+          <View style={{flex: 1, marginLeft: SIZES.padding}}>
+            {/* Organizations */}
+            <ImageTextButton
+              image={images.organizations}
+              label={'homePage:proOrganizations'}
+              onPress={() => console.log('homePage:proOrganizations')}
+            />
+
+            {/* Doctor */}
+            <ImageTextButton
+              customContainerStyle={{marginTop: SIZES.padding}}
+              image={images.elite_doctor}
+              label={'homePage:eliteDoctors'}
+              onPress={() => console.log('homePage:eliteDoctors')}
+            />
           </View>
         </View>
-        {/* </View> */}
       </View>
+    );
+  }
+
+  function renderComponents() {
+    const HeaderComponent = () => (
+      <View>
+        {renderService()}
+        {renderScanEngine()}
+        {renderBanners()}
+        <LanguageSelector />
+      </View>
+    );
+
+    const renderAdItem = ({item}) => (
+      <TouchableOpacity
+        style={{
+          marginTop: SIZES.padding,
+          width: SIZES.width / 2 - 15,
+        }}
+        onPress={() => console.log(t(item.title))}>
+        {/*Ad Image*/}
+        <View
+          style={{
+            height: SIZES.width / 2 - 15,
+            borderTopLeftRadius: SIZES.font,
+            borderTopRightRadius: SIZES.font,
+            backgroundColor: COLORS.titleBg,
+          }}>
+          <Image
+            source={item.img}
+            resizeMode="contain"
+            style={{
+              width: '100%',
+              height: '100%',
+              borderTopLeftRadius: SIZES.font,
+              borderTopRightRadius: SIZES.font,
+            }}
+          />
+        </View>
+
+        {/*Ad Info*/}
+        <View
+          style={{
+            padding: SIZES.padding,
+            backgroundColor: COLORS.white,
+            borderBottomLeftRadius: SIZES.font,
+            borderBottomRightRadius: SIZES.font,
+          }}>
+          {/* Title */}
+          <Text
+            numberOfLines={2}
+            style={{
+              ...FONTS.body4,
+              color: COLORS.textTitle,
+              height: SIZES.radius * 2,
+            }}>
+            {t(item.title)}
+          </Text>
+          {/* Clinic */}
+          <Text
+            style={{
+              ...FONTS.body5,
+              color: COLORS.subtitle,
+              marginTop: SIZES.base,
+            }}>
+            {t(item.clinic)}
+          </Text>
+          {/* Price */}
+          <View style={{flexDirection: 'row', marginTop: SIZES.base}}>
+            <Text style={{...FONTS.body5, color: COLORS.primary}}>RM</Text>
+            <Text
+              style={{
+                ...FONTS.title3,
+                color: COLORS.primary,
+                paddingLeft: 3,
+              }}>
+              {t(item.newPrice)}
+            </Text>
+            {item.oriPrice && item.oriPrice.length > 0 ? (
+              <Text
+                style={{
+                  ...FONTS.body5,
+                  paddingLeft: SIZES.base,
+                  textDecorationLine: 'line-through',
+                }}>
+                RM{t(item.oriPrice)}
+              </Text>
+            ) : null}
+          </View>
+
+          {/* Place */}
+          <Text
+            style={{
+              ...FONTS.body5,
+              color: COLORS.subtitle,
+              marginTop: SIZES.base,
+            }}>
+            {t(item.place)}
+          </Text>
+        </View>
+      </TouchableOpacity>
+    );
+
+    return (
+      <FlatList
+        ListHeaderComponent={HeaderComponent}
+        contentContainerStyle={{
+          backgroundColor: COLORS.base,
+          paddingHorizontal: SIZES.padding,
+        }}
+        numColumns={2}
+        columnWrapperStyle={{justifyContent: 'space-between'}}
+        data={dummyData.advertisement}
+        keyExtractor={(item) => `${item.id}`}
+        renderItem={renderAdItem}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+        showsVerticalScrollIndicator={false}
+        ListFooterComponent={
+          <View style={{marginBottom: Platform.OS == 'ios' ? 80 : 130}}></View>
+        }
+      />
     );
   }
 
@@ -326,16 +469,8 @@ const Home = ({navigation}) => {
       {/* Header */}
       {renderHeader()}
 
-      <ScrollView
-        contentContainerStyle={{paddingBottom: 100}}
-        style={{backgroundColor: COLORS.base}}>
-        {renderService()}
-
-        {renderScanEngine()}
-
-        {renderBanners()}
-        <LanguageSelector />
-      </ScrollView>
+      {/*Component*/}
+      {renderComponents()}
     </SafeAreaView>
   );
 };
@@ -344,17 +479,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.white,
-  },
-  shadow: {
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 4.65,
-
-    elevation: 8,
   },
 });
 

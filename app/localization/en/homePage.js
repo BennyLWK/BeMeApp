@@ -23,7 +23,7 @@ export default {
   threeDImage: '3D\nImage',
   starFace: 'Star\nFace',
   skinDetection: 'Skin\nDetection',
-  proOrganizations: 'Professional Organizations',
+  proOrganizations: 'Professional\nOrganizations',
   eliteDoctors: 'Elite Doctors',
   popular: 'Popular',
 };
