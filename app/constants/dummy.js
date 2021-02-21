@@ -1,7 +1,7 @@
 import icons from './icons';
-import {useTranslation} from 'react-i18next';
+import images from './images';
 
-export const model = [
+const model = [
   {
     id: 1,
     image: require('../assets/images/model01.png'),
@@ -60,7 +60,7 @@ export const model = [
   },
 ];
 
-export const categoryScanEngine = [
+const categoryScanEngine = [
   {
     id: 1,
     name: 'homePage:mirrorFaceMeasurement',
@@ -191,7 +191,47 @@ const categoryService = [
   },
 ];
 
+const advertisement = [
+  {
+    id: 1,
+    img: images.banner1,
+    title: 'common:adTitle1',
+    clinic: 'common:adClinic1',
+    oriPrice: 'common:adOriPrice1',
+    newPrice: 'common:adNewPrice1',
+    place: 'common:adPlace1',
+  },
+  {
+    id: 2,
+    img: images.banner2,
+    title: 'common:adTitle2',
+    clinic: 'common:adClinic2',
+    oriPrice: 'common:adOriPrice2',
+    newPrice: 'common:adNewPrice2',
+    place: 'common:adPlace2',
+  },
+  {
+    id: 3,
+    img: images.banner3,
+    title: 'common:adTitle3',
+    clinic: 'common:adClinic3',
+    oriPrice: 'common:adOriPrice3',
+    newPrice: 'common:adNewPrice3',
+    place: 'common:adPlace3',
+  },
+  {
+    id: 4,
+    img: images.banner4,
+    title: 'common:adTitle4',
+    clinic: 'common:adClinic4',
+    oriPrice: null,
+    newPrice: 'common:adNewPrice4',
+    place: 'common:adPlace4',
+  },
+];
+
 const dummyData = {
+  advertisement,
   categoryService,
   categoryScanEngine,
   model,
