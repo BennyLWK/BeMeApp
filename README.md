@@ -7,20 +7,20 @@
 
 ## Getting Started
 
-#### 1. Clone and Install
+#### 1. Clone
 
 ```bash
 # Clone the repo
 git clone https://github.com/BennyLWK/BeMeApp.git
-
-# Navigate to clonned folder and Install dependencies
-cd BeMeApp && yarn install
-
-# Install Pods
-cd ios && pod install
 ```
 
-#### 2. Open BEME in your simulator
+#### 2. Install
+```bash
+# Navigate to cloned folder and run the project_init file
+# Double clicked the project_init file
+```
+
+#### 3. Open BEME in your simulator
 
 Run this command to start the development server and to start your app on iOS simulator:
 
