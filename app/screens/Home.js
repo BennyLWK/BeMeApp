@@ -11,6 +11,7 @@ import {
   Platform,
 } from 'react-native';
 import {useTranslation} from 'react-i18next';
+import Carousel from 'react-native-banner-carousel';
 
 import '../localization';
 import LanguageSelector from './LanguageSelector';
@@ -252,6 +253,23 @@ const Home = ({navigation}) => {
     );
   }
 
+  function renderBannerAdPage(item, index) {
+    return (
+      <View key={index}>
+        <TouchableOpacity
+          onPress={() => {
+            console.log('Banner Advertisement: ' + t(item.title));
+            navigation.navigate('Discover');
+          }}>
+          <Image
+            style={{width: '100%', height: '100%', borderRadius: SIZES.font}}
+            source={item.img}
+          />
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
   function renderBanners() {
     const ImageTextButton = ({customContainerStyle, image, label, onPress}) => {
       return (
@@ -298,25 +316,22 @@ const Home = ({navigation}) => {
           {/* Banner Advertisement */}
           <View
             style={{
-              backgroundColor: COLORS.primary,
+              backgroundColor: COLORS.titleBg,
               borderRadius: SIZES.font,
               flex: 1.0,
             }}>
-            <TouchableOpacity
-              style={{flex: 1}}
-              onPress={() => {
-                navigation.navigate('Discover');
-              }}>
-              <Image
-                source={images.banner1}
-                resizeMode="cover"
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  borderRadius: SIZES.font,
-                }}
-              />
-            </TouchableOpacity>
+            <Carousel
+              autoplay
+              autoplayTimeout={5000}
+              loop
+              index={0}
+              activePageIndicatorStyle={{backgroundColor: COLORS.white}}
+              pageIndicatorStyle={{backgroundColor: COLORS.white, opacity: 0.4}}
+              pageSize={SIZES.width / 2 - 15}>
+              {dummyData.advertisement.map((item, index) =>
+                renderBannerAdPage(item, index),
+              )}
+            </Carousel>
           </View>
 
           {/* Right View */}
@@ -458,7 +473,7 @@ const Home = ({navigation}) => {
         }
         showsVerticalScrollIndicator={false}
         ListFooterComponent={
-          <View style={{marginBottom: Platform.OS == 'ios' ? 80 : 130}}></View>
+          <View style={{marginBottom: Platform.OS == 'ios' ? 80 : 120}}></View>
         }
       />
     );

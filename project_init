@@ -1,0 +1,18 @@
+# Init Script
+
+scriptPath=$(cd `dirname $0`; pwd)
+echo Initializing...
+
+cd ${scriptPath}
+yarn install
+
+#iOS initialize CocoaPods Library
+cd ${scriptPath}/ios
+pod install
+
+cd ${scriptPath}
+
+#react-native-banner-carousel
+cp ./init/rn-banner-carousel/Carousel.js ${scriptPath}/node_modules/react-native-banner-carousel/out/Carousel.js
+
+echo 'Initialize done'
