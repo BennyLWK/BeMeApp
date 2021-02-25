@@ -14,7 +14,6 @@ import {useTranslation} from 'react-i18next';
 import Carousel from 'react-native-banner-carousel';
 
 import '../localization';
-import LanguageSelector from './LanguageSelector';
 import {dummyData, icons, images, SIZES, COLORS, FONTS} from '../constants';
 
 const Home = ({navigation}) => {
@@ -128,6 +127,7 @@ const Home = ({navigation}) => {
           }}
           onPress={() => {
             console.log('Side menu clicked');
+            navigation.openDrawer();
           }}>
           <Image
             source={icons.btn_Menu}
@@ -362,7 +362,6 @@ const Home = ({navigation}) => {
         {renderService()}
         {renderScanEngine()}
         {renderBanners()}
-        <LanguageSelector />
       </View>
     );
 

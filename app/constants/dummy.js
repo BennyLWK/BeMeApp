@@ -230,11 +230,45 @@ const advertisement = [
   },
 ];
 
+const sideMenu = [
+  {
+    id: 1,
+    name: 'common:myBooking',
+    icon: icons.btn_booking,
+    screenName: 'Booking',
+  },
+  {
+    id: 2,
+    name: 'common:writeDiary',
+    icon: icons.btn_diary,
+    screenName: 'Booking',
+  },
+  {
+    id: 3,
+    name: 'common:blogging',
+    icon: icons.btn_blogging,
+    screenName: 'Login',
+  },
+  {
+    id: 4,
+    name: 'common:askQuestion',
+    icon: icons.btn_question,
+    screenName: 'Login',
+  },
+  {
+    id: 5,
+    name: 'common:applyCert',
+    icon: icons.btn_verify,
+    screenName: 'Login',
+  },
+];
+
 const dummyData = {
   advertisement,
   categoryService,
   categoryScanEngine,
   model,
+  sideMenu,
 };
 
 export default dummyData;

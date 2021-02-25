@@ -1,4 +1,4 @@
-const btn_back = require('../assets/icons/btn_back.png');
+const back = require('../assets/icons/back.png');
 
 // Tab
 const home = require('../assets/icons/home.png');
@@ -44,6 +44,13 @@ const medical_health = require('../assets/icons/medical_health.png');
 const anti_aging = require('../assets/icons/anti_aging.png');
 const other = require('../assets/icons/other.png');
 
+// Side Menu
+const btn_booking = require('../assets/icons/btn_booking.png');
+const btn_diary = require('../assets/icons/btn_diary.png');
+const btn_blogging = require('../assets/icons/btn_blogging.png');
+const btn_question = require('../assets/icons/btn_question.png');
+const btn_verify = require('../assets/icons/btn_verify.png');
+
 export default {
   hyaluronic,
   face_lift,
@@ -64,7 +71,7 @@ export default {
   medical_health,
   anti_aging,
   other,
-  btn_back,
+  back,
   home,
   home_active,
   discover,
@@ -82,4 +89,9 @@ export default {
   face_analysis,
   skin_analysis,
   star_face,
+  btn_booking,
+  btn_diary,
+  btn_blogging,
+  btn_question,
+  btn_verify,
 };
