@@ -24,4 +24,9 @@ export default {
   adOriPrice4: '7900',
   adNewPrice4: '6888',
   adPlace4: 'Ipoh',
+  myBooking: 'My Booking',
+  writeDiary: 'Write Diary',
+  blogging: 'Blogging',
+  askQuestion: 'Ask Question',
+  applyCert: 'Apply For Certification',
 };

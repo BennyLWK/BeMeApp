@@ -27,4 +27,9 @@ export default {
   adOriPrice4: '7900',
   adNewPrice4: '6888',
   adPlace4: '怡保',
+  myBooking: '我的预订',
+  writeDiary: '写日记',
+  blogging: '写播客',
+  askQuestion: '去提问',
+  applyCert: '申请认证',
 };
