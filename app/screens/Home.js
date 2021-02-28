@@ -8,12 +8,12 @@ import {
   Image,
   RefreshControl,
   FlatList,
-  Platform,
 } from 'react-native';
 import {useTranslation} from 'react-i18next';
 import Carousel from 'react-native-banner-carousel';
 
 import '../localization';
+import {CustomCarousel, ItemButton} from '../components';
 import {dummyData, icons, images, SIZES, COLORS, FONTS} from '../constants';
 
 const Home = ({navigation}) => {
@@ -113,7 +113,7 @@ const Home = ({navigation}) => {
                   {t('homePage:popular')}
                 </Text>
               </View>
-              <View style={{flex: 1}}></View>
+              <View style={{flex: 1}} />
             </View>
           </TouchableOpacity>
         </View>
@@ -143,56 +143,20 @@ const Home = ({navigation}) => {
   }
 
   function renderService() {
-    const renderItem = ({item}) => (
-      <TouchableOpacity
-        style={{
-          marginBottom: SIZES.padding,
-          width: 80,
-          alignItems: 'center',
-        }}
-        onPress={() => console.log(t(item.name))}>
-        <View
-          style={{
-            height: 50,
-            width: 50,
-            marginBottom: 5,
-            borderRadius: 20,
-            backgroundColor: item.backgroundColor,
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
-          <Image
-            source={item.icon}
-            resizeMode="contain"
-            style={{
-              height: 30,
-              width: 30,
-              tintColor: item.color,
-            }}
-          />
-        </View>
-        <Text
-          style={{
-            color: COLORS.textTitle,
-            textAlign: 'center',
-            flexWrap: 'wrap',
-            ...FONTS.body4,
-          }}>
-          {t(item.name)}
-        </Text>
-      </TouchableOpacity>
-    );
-
     return (
-      <FlatList
-        //ListHeaderComponent={Header}
-        //horizontal
-        data={dummyData.categoryService}
-        numColumns={5}
-        columnWrapperStyle={{justifyContent: 'space-between'}}
-        keyExtractor={(item) => `${item.id}`}
-        renderItem={renderItem}
-        style={{backgroundColor: COLORS.white, marginHorizontal: -10}}
+      <CustomCarousel
+        style="flatList"
+        itemsPerInterval={1}
+        items={[
+          {
+            id: 101,
+            data: dummyData.categoryService1,
+          },
+          {
+            id: 102,
+            data: dummyData.categoryService2,
+          },
+        ]}
       />
     );
   }
@@ -200,42 +164,21 @@ const Home = ({navigation}) => {
   function renderScanEngine() {
     const renderItem = ({item}) => {
       return (
-        <TouchableOpacity
-          style={{
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginRight: SIZES.padding,
+        <ItemButton
+          customContainerStyle={{marginRight: SIZES.padding}}
+          customIconStyle={{
+            width: SIZES.width * 0.15,
+            height: SIZES.width * 0.15,
           }}
+          icon={item.icon}
+          label={t(item.name)}
           onPress={() => console.log(t(item.name))}
-          //onSelectCategory(item)
-        >
-          <View
-            style={{
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}>
-            <Image
-              source={item.icon}
-              resizeMode="contain"
-              style={{
-                width: 50,
-                height: 50,
-              }}
-            />
-          </View>
-
-          <Text
-            numberOfLines={2}
-            style={{
-              textAlign: 'center',
-              width: 80,
-              marginTop: SIZES.padding,
-              color: COLORS.subtitle,
-              ...FONTS.body4,
-            }}>
-            {t(item.name)}
-          </Text>
-        </TouchableOpacity>
+          customLabelStyle={{
+            width: SIZES.width * 0.25,
+            marginTop: SIZES.padding,
+            color: COLORS.subtitle,
+          }}
+        />
       );
     };
 
@@ -273,36 +216,36 @@ const Home = ({navigation}) => {
   function renderBanners() {
     const ImageTextButton = ({customContainerStyle, image, label, onPress}) => {
       return (
-        <TouchableOpacity
-          style={{flex: 1, ...customContainerStyle}}
-          onPress={onPress}>
-          <View
-            style={{
-              width: '100%',
-              height: '100%',
-              borderRadius: SIZES.font,
-            }}>
-            <Image
-              source={image}
-              resizeMode="cover"
-              style={{
-                width: '100%',
-                height: '100%',
-                borderRadius: SIZES.font,
-              }}
-            />
-            <Text
-              style={{
-                ...FONTS.body3,
-                color: COLORS.textTitle,
-                position: 'absolute',
-                top: SIZES.base,
-                left: SIZES.base,
-              }}>
-              {t(label)}
-            </Text>
-          </View>
-        </TouchableOpacity>
+        <ItemButton
+          customContainerStyle={{
+            flex: 1,
+            alignItems: 'flex-start',
+            justifyContent: 'flex-start',
+            ...customContainerStyle,
+          }}
+          customIconStyle={{
+            width: '100%',
+            height: '100%',
+            borderRadius: SIZES.font,
+          }}
+          customIconContainerStyle={{
+            alignItems: 'flex-start',
+            justifyContent: 'flex-start',
+            width: '100%',
+            height: '100%',
+            borderRadius: SIZES.font,
+          }}
+          customLabelStyle={{
+            ...FONTS.body3,
+            color: COLORS.textTitle,
+            position: 'absolute',
+            top: SIZES.base,
+            left: SIZES.base,
+          }}
+          icon={image}
+          label={t(label)}
+          onPress={onPress}
+        />
       );
     };
 
@@ -357,6 +300,10 @@ const Home = ({navigation}) => {
   }
 
   function renderComponents() {
+    console.log(
+      'SIZES => width: ' + SIZES.width + ' & height: ' + SIZES.height,
+    );
+    console.log();
     const HeaderComponent = () => (
       <View>
         {renderService()}
@@ -472,7 +419,7 @@ const Home = ({navigation}) => {
         }
         showsVerticalScrollIndicator={false}
         ListFooterComponent={
-          <View style={{marginBottom: Platform.OS == 'ios' ? 80 : 120}}></View>
+          <View style={{marginBottom: SIZES.height * 0.12}} /> //Platform.OS == 'ios' ? 80 : 120}} />
         }
       />
     );
