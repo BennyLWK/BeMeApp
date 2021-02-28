@@ -1,13 +1,10 @@
 import React from 'react';
-import {View, Image, TouchableOpacity, Text, StyleSheet} from 'react-native';
-import {
-  createBottomTabNavigator,
-  BottomTabBar,
-} from '@react-navigation/bottom-tabs';
+import {View, Image, Text, StyleSheet} from 'react-native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {useTranslation} from 'react-i18next';
 
 import {AskDoctor, Discover, Home, Inbox, Profile} from '../screens';
-import {COLORS, FONTS, icons} from '../constants';
+import {COLORS, FONTS, icons, SIZES} from '../constants';
 
 const Tab = createBottomTabNavigator();
 
@@ -26,7 +23,7 @@ const Tabs = () => {
           elevation: 0,
           backgroundColor: COLORS.white,
           borderTopColor: 'transparent',
-          height: 100,
+          height: SIZES.height * 0.11,
         },
       }}>
       <Tab.Screen
@@ -38,17 +35,15 @@ const Tabs = () => {
               <Image
                 source={focused ? icons.home_active : icons.home}
                 resizeMode="contain"
-                style={{
-                  width: 30,
-                  height: 30,
-                  tintColor: focused ? COLORS.primary : COLORS.textTitle,
-                }}
+                style={[styles.imageStyle]}
               />
               <Text
-                style={{
-                  color: focused ? COLORS.primary : COLORS.textTitle,
-                  ...FONTS.body5,
-                }}>
+                style={[
+                  styles.textStyle,
+                  {
+                    color: focused ? COLORS.primary : COLORS.textTitle,
+                  },
+                ]}>
                 {t('common:home')}
               </Text>
             </View>
@@ -62,19 +57,17 @@ const Tabs = () => {
           tabBarIcon: ({focused}) => (
             <View style={{alignItems: 'center', justifyContent: 'center'}}>
               <Image
-                source={focused ? icons.discover_active : icons.discover_active}
+                source={focused ? icons.discover_active : icons.discover}
                 resizeMode="contain"
-                style={{
-                  width: 30,
-                  height: 30,
-                  tintColor: focused ? COLORS.primary : COLORS.textTitle,
-                }}
+                style={[styles.imageStyle]}
               />
               <Text
-                style={{
-                  color: focused ? COLORS.primary : COLORS.textTitle,
-                  ...FONTS.body5,
-                }}>
+                style={[
+                  styles.textStyle,
+                  {
+                    color: focused ? COLORS.primary : COLORS.textTitle,
+                  },
+                ]}>
                 {t('common:discover')}
               </Text>
             </View>
@@ -90,17 +83,15 @@ const Tabs = () => {
               <Image
                 source={focused ? icons.doctor_active : icons.doctor}
                 resizeMode="contain"
-                style={{
-                  width: 30,
-                  height: 30,
-                  tintColor: focused ? COLORS.primary : COLORS.textTitle,
-                }}
+                style={[styles.imageStyle]}
               />
               <Text
-                style={{
-                  color: focused ? COLORS.primary : COLORS.textTitle,
-                  ...FONTS.body5,
-                }}>
+                style={[
+                  styles.textStyle,
+                  {
+                    color: focused ? COLORS.primary : COLORS.textTitle,
+                  },
+                ]}>
                 {t('common:askDoctor')}
               </Text>
             </View>
@@ -116,17 +107,15 @@ const Tabs = () => {
               <Image
                 source={focused ? icons.inbox_active : icons.inbox}
                 resizeMode="contain"
-                style={{
-                  width: 30,
-                  height: 30,
-                  tintColor: focused ? COLORS.primary : COLORS.textTitle,
-                }}
+                style={[styles.imageStyle]}
               />
               <Text
-                style={{
-                  color: focused ? COLORS.primary : COLORS.textTitle,
-                  ...FONTS.body5,
-                }}>
+                style={[
+                  styles.textStyle,
+                  {
+                    color: focused ? COLORS.primary : COLORS.textTitle,
+                  },
+                ]}>
                 {t('common:inbox')}
               </Text>
             </View>
@@ -142,17 +131,15 @@ const Tabs = () => {
               <Image
                 source={focused ? icons.profile_active : icons.profile}
                 resizeMode="contain"
-                style={{
-                  width: 30,
-                  height: 30,
-                  tintColor: focused ? COLORS.primary : COLORS.textTitle,
-                }}
+                style={[styles.imageStyle]}
               />
               <Text
-                style={{
-                  color: focused ? COLORS.primary : COLORS.textTitle,
-                  ...FONTS.body5,
-                }}>
+                style={[
+                  styles.textStyle,
+                  {
+                    color: focused ? COLORS.primary : COLORS.textTitle,
+                  },
+                ]}>
                 {t('common:profile')}
               </Text>
             </View>
@@ -164,16 +151,14 @@ const Tabs = () => {
 };
 
 const styles = StyleSheet.create({
-  shadow: {
-    shadowColor: COLORS.primary,
-    shadowOffset: {
-      width: 0,
-      height: 10,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-
-    elevation: 5,
+  imageStyle: {
+    width: SIZES.width * 0.07,
+    height: SIZES.width * 0.07,
+  },
+  textStyle: {
+    textAlign: 'center',
+    width: SIZES.width * 0.2,
+    ...FONTS.body5,
   },
 });
 

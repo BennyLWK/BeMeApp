@@ -93,7 +93,7 @@ const categoryScanEngine = [
   },
 ];
 
-const categoryService = [
+const categoryService1 = [
   {
     id: 1,
     name: 'homePage:hyaluronicAcid',
@@ -144,6 +144,9 @@ const categoryService = [
     name: 'homePage:laserHairRemoval',
     icon: icons.laser_hair,
   },
+];
+
+const categoryService2 = [
   {
     id: 11,
     name: 'homePage:ear',
@@ -265,7 +268,8 @@ const sideMenu = [
 
 const dummyData = {
   advertisement,
-  categoryService,
+  categoryService1,
+  categoryService2,
   categoryScanEngine,
   model,
   sideMenu,
