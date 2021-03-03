@@ -2,9 +2,9 @@ import React from 'react';
 import {View, TouchableOpacity, Image} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
-import {COLORS, SIZES, FONTS, icons} from '../constants';
+import {COLORS, SIZES, icons} from '../constants';
 
-const HeaderBar = ({right}) => {
+const HeaderBar = ({customContainerStyle, right}) => {
   const navigation = useNavigation();
 
   return (
@@ -13,6 +13,7 @@ const HeaderBar = ({right}) => {
         paddingHorizontal: SIZES.padding,
         paddingTop: SIZES.padding,
         flexDirection: 'row',
+        ...customContainerStyle,
       }}>
       <View style={{flex: 1, alignItems: 'flex-start'}}>
         <TouchableOpacity

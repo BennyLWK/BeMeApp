@@ -51,6 +51,14 @@ const btn_blogging = require('../assets/icons/btn_blogging.png');
 const btn_question = require('../assets/icons/btn_question.png');
 const btn_verify = require('../assets/icons/btn_verify.png');
 
+// Login
+const apple = require('../assets/icons/apple.png');
+const fb = require('../assets/icons/fb.png');
+const google = require('../assets/icons/google.png');
+const phone = require('../assets/icons/mobile_phone.png');
+
+const arrow_down = require('../assets/icons/arrow_down.png');
+
 export default {
   hyaluronic,
   face_lift,
@@ -94,4 +102,9 @@ export default {
   btn_blogging,
   btn_question,
   btn_verify,
+  apple,
+  fb,
+  google,
+  phone,
+  arrow_down,
 };

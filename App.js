@@ -5,7 +5,7 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 import {NavigationContainer} from '@react-navigation/native';
 
 import Tabs from './app/navigation/tabs';
-import {Booking, Login} from './app/screens';
+import {Booking, EnterPhoneNumber, Login} from './app/screens';
 import {CustomDrawerContent} from './app/components';
 import {SIZES} from './app/constants';
 
@@ -41,7 +41,7 @@ const App = () => {
         }}
         initialRouteName={'Home'}>
         <Stack.Screen name="Home" component={DrawerNavigator} />
-        {/*<Stack.Screen name="Login" component={Login} />*/}
+        <Stack.Screen name="EnterPhoneNumber" component={EnterPhoneNumber} />
       </Stack.Navigator>
     </NavigationContainer>
   );
