@@ -1,9 +1,9 @@
 import homePage from './homePage';
 import common from './common';
-import languageSelector from './languageSelector';
+import login from './login';
 
 export default {
   homePage,
   common,
-  languageSelector,
+  login,
 };
