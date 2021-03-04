@@ -15,9 +15,10 @@ git clone https://github.com/BennyLWK/BeMeApp.git
 ```
 
 #### 2. Install
+
 ```bash
-# Navigate to cloned folder and run the project_init file
-# Double clicked the project_init file
+# Navigate to cloned folder and run the project init file
+# Double clicked the project_init file (Mac) / project_init_window.bat (Window)
 ```
 
 #### 3. Open BEME in your simulator
