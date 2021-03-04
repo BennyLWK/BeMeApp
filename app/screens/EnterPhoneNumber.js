@@ -28,15 +28,23 @@ const EnterPhoneNumber = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [focusInput, setFocusInput] = useState(true);
   const [phoneNumber, setPhoneNumber] = useState();
+  const [errorMsg, setErrorMsg] = useState();
 
   const onChangePhone = (number) => {
+    number.replace(/[^0-9]/g, '');
     setPhoneNumber(number);
+    setErrorMsg('');
   };
 
   const onPressContinue = () => {
     if (phoneNumber) {
-      console.log('Phone Number: ' + selectedArea.callingCode + phoneNumber);
-      navigation.navigate('Login');
+      if (phoneValidation(phoneNumber) === false) {
+        setPhoneNumber('');
+        setErrorMsg(t('errorMessage:invalidPhoneNum'));
+      } else {
+        console.log('Phone Number: ' + selectedArea.callingCode + phoneNumber);
+        navigation.navigate('Login');
+      }
     }
   };
 
@@ -77,6 +85,15 @@ const EnterPhoneNumber = ({navigation}) => {
       });
   }, []);
 
+  function phoneValidation(phoneNumber) {
+    const reg = /^[0-9]+$/;
+    if (reg.test(phoneNumber) === false) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   function renderInstruction() {
     return (
       <View
@@ -101,90 +118,100 @@ const EnterPhoneNumber = ({navigation}) => {
           marginHorizontal: SIZES.padding * 4,
         }}>
         {/* Phone Number */}
-        <View style={{}}>
-          <View
+        <View
+          style={{
+            flexDirection: 'row',
+          }}>
+          {/* Country Code */}
+          <TouchableOpacity
             style={{
+              width: 120,
+              height: 50,
+              alignItems: 'flex-end',
+              paddingBottom: 2,
+              marginHorizontal: SIZES.base,
+              borderBottomColor: COLORS.displayText,
+              borderBottomWidth: 1,
               flexDirection: 'row',
-            }}>
-            {/* Country Code */}
-            <TouchableOpacity
-              style={{
-                width: 120,
-                height: 50,
-                alignItems: 'flex-end',
-                paddingBottom: 2,
-                marginHorizontal: SIZES.base,
-                borderBottomColor: COLORS.displayText,
-                borderBottomWidth: 1,
-                flexDirection: 'row',
-                ...FONTS.body2,
-              }}
-              onPress={() => setModalVisible(true)}>
-              <View style={{justifyContent: 'center', marginLeft: SIZES.base}}>
-                <Image
-                  source={{uri: selectedArea?.flag}}
-                  resizeMode="contain"
-                  style={{
-                    width: 30,
-                    height: 30,
-                  }}
-                />
-              </View>
-
-              <View
+              ...FONTS.body2,
+            }}
+            onPress={() => setModalVisible(true)}>
+            <View style={{justifyContent: 'center', marginLeft: SIZES.base}}>
+              <Image
+                source={{uri: selectedArea?.flag}}
+                resizeMode="contain"
                 style={{
-                  justifyContent: 'center',
-                  marginLeft: SIZES.base,
-                }}>
-                <Text style={{color: COLORS.textTitle, ...FONTS.body2}}>
-                  {selectedArea?.callingCode}
-                </Text>
-              </View>
-              <View
-                style={{
-                  justifyContent: 'center',
-                  marginBottom: SIZES.base,
-                  marginLeft: SIZES.base,
-                }}>
-                <Image
-                  source={icons.arrow_down}
-                  style={{
-                    width: 10,
-                    height: 10,
-                    tintColor: COLORS.displayText,
-                  }}
-                />
-              </View>
-            </TouchableOpacity>
+                  width: 30,
+                  height: 30,
+                }}
+              />
+            </View>
 
-            {/* Phone Number */}
-            <TextInput
-              ref={(input) => (textInput = input)}
+            <View
               style={{
-                flex: 1,
-                borderBottomColor: focusInput
-                  ? COLORS.primary
-                  : COLORS.displayText,
-                borderBottomWidth: 1,
-                height: 50,
-                color: COLORS.subtitle,
-                paddingBottom: 0,
-                ...FONTS.body2,
-              }}
-              keyboardType="phone-pad"
-              maxLength={maxLengthPhoneNum}
-              placeholder="Enter Phone Number"
-              placeholderTextColor={COLORS.displayText}
-              selectionColor={COLORS.white}
-              value={phoneNumber}
-              onChangeText={onChangePhone}
-              secureTextEntry={false}
-              onFocus={onChangeFocus}
-              onBlur={onChangeBlur}
-              autoFocus={focusInput}
-            />
-          </View>
+                justifyContent: 'center',
+                marginLeft: SIZES.base,
+              }}>
+              <Text style={{color: COLORS.textTitle, ...FONTS.body2}}>
+                {selectedArea?.callingCode}
+              </Text>
+            </View>
+            <View
+              style={{
+                justifyContent: 'center',
+                marginBottom: SIZES.base,
+                marginLeft: SIZES.base,
+              }}>
+              <Image
+                source={icons.arrow_down}
+                style={{
+                  width: 10,
+                  height: 10,
+                  tintColor: COLORS.displayText,
+                }}
+              />
+            </View>
+          </TouchableOpacity>
+
+          {/* Phone Number */}
+          <TextInput
+            ref={(input) => (textInput = input)}
+            style={{
+              flex: 1,
+              borderBottomColor: focusInput
+                ? COLORS.primary
+                : COLORS.displayText,
+              borderBottomWidth: 1,
+              height: 50,
+              color: COLORS.subtitle,
+              paddingBottom: 0,
+              ...FONTS.body2,
+            }}
+            keyboardType="phone-pad"
+            maxLength={maxLengthPhoneNum}
+            placeholder={t('login:enterPhoneNum')}
+            placeholderTextColor={COLORS.displayText}
+            selectionColor={COLORS.white}
+            value={phoneNumber}
+            onChangeText={onChangePhone}
+            secureTextEntry={false}
+            onFocus={onChangeFocus}
+            onBlur={onChangeBlur}
+            autoFocus={focusInput}
+          />
         </View>
+        {/*</View>*/}
+
+        {/* Error Message */}
+        <Text
+          style={{
+            color: COLORS.errorMsg,
+            marginTop: SIZES.base,
+            marginHorizontal: SIZES.padding,
+            ...FONTS.body3,
+          }}>
+          {errorMsg}
+        </Text>
       </View>
     );
   }

@@ -7,6 +7,7 @@ const beme_big = require('../assets/images/beme_big.png');
 const beme_small = require('../assets/images/beme_small.png');
 const beme_logo = require('../assets/images/beme_logo.png');
 const elite_doctor = require('../assets/images/elite_doctor.png');
+const model = require('../assets/images/model.png');
 const model01 = require('../assets/images/model01.png');
 const model02 = require('../assets/images/model02.png');
 const model03 = require('../assets/images/model03.png');
@@ -34,6 +35,7 @@ export default {
   beme_small,
   beme_logo,
   elite_doctor,
+  model,
   model01,
   model02,
   model03,

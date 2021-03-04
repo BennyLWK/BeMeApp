@@ -11,6 +11,8 @@ export const COLORS = {
   displayText: '#A8A8A8',
   base: '#F7F7F7',
   titleBg: '#EDEDED',
+
+  errorMsg: '#FF4747',
 };
 
 export const SIZES = {
