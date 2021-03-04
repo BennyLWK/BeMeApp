@@ -12,6 +12,6 @@ export default {
   loginRemark3: '.',
 
   // Enter Phone Number
-  enterPhoneNum: 'Enter your phone number',
+  enterPhoneNum: 'Enter phone number',
   continue: 'Continue',
 };
