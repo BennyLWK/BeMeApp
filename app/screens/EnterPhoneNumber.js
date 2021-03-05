@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   View,
   Text,
@@ -12,16 +12,16 @@ import {
   ScrollView,
   Platform,
 } from 'react-native';
-import {useTranslation} from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import LinearGradient from 'react-native-linear-gradient';
 
-import {HeaderBar} from '../components';
-import {COLORS, SIZES, FONTS, icons} from '../constants';
+import { HeaderBar } from '../components';
+import { COLORS, SIZES, FONTS, icons } from '../constants';
 
-const EnterPhoneNumber = ({navigation}) => {
+const EnterPhoneNumber = ({ navigation }) => {
   let textInput = useRef(null);
 
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   const maxLengthPhoneNum = 12;
   const [areas, setAreas] = useState([]);
   const [selectedArea, setSelectedArea] = useState(null);
@@ -43,7 +43,7 @@ const EnterPhoneNumber = ({navigation}) => {
         setErrorMsg(t('errorMessage:invalidPhoneNum'));
       } else {
         console.log('Phone Number: ' + selectedArea.callingCode + phoneNumber);
-        navigation.navigate('Login');
+        navigation.navigate('EnterEmail');
       }
     }
   };
@@ -102,7 +102,7 @@ const EnterPhoneNumber = ({navigation}) => {
           alignItems: 'center',
           justifyContent: 'center',
         }}>
-        <Text style={{...FONTS.body1, color: COLORS.textTitle}}>
+        <Text style={{ ...FONTS.body1, color: COLORS.textTitle }}>
           {t('login:enterPhoneNum')}
         </Text>
       </View>
@@ -136,9 +136,9 @@ const EnterPhoneNumber = ({navigation}) => {
               ...FONTS.body2,
             }}
             onPress={() => setModalVisible(true)}>
-            <View style={{justifyContent: 'center', marginLeft: SIZES.base}}>
+            <View style={{ justifyContent: 'center', marginLeft: SIZES.base }}>
               <Image
-                source={{uri: selectedArea?.flag}}
+                source={{ uri: selectedArea?.flag }}
                 resizeMode="contain"
                 style={{
                   width: 30,
@@ -152,7 +152,7 @@ const EnterPhoneNumber = ({navigation}) => {
                 justifyContent: 'center',
                 marginLeft: SIZES.base,
               }}>
-              <Text style={{color: COLORS.textTitle, ...FONTS.body2}}>
+              <Text style={{ color: COLORS.textTitle, ...FONTS.body2 }}>
                 {selectedArea?.callingCode}
               </Text>
             </View>
@@ -247,23 +247,23 @@ const EnterPhoneNumber = ({navigation}) => {
   }
 
   function renderAreaCodesModal() {
-    const renderItem = ({item}) => {
+    const renderItem = ({ item }) => {
       return (
         <TouchableOpacity
-          style={{padding: SIZES.padding, flexDirection: 'row'}}
+          style={{ padding: SIZES.padding, flexDirection: 'row' }}
           onPress={() => {
             setSelectedArea(item);
             setModalVisible(false);
           }}>
           <Image
-            source={{uri: item.flag}}
+            source={{ uri: item.flag }}
             style={{
               width: 30,
               height: 30,
               marginRight: 10,
             }}
           />
-          <Text style={{...FONTS.body4}}>{item.name}</Text>
+          <Text style={{ ...FONTS.body4 }}>{item.name}</Text>
         </TouchableOpacity>
       );
     };
@@ -272,7 +272,7 @@ const EnterPhoneNumber = ({navigation}) => {
       <Modal animationType="slide" transparent={true} visible={modalVisible}>
         <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
           <View
-            style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+            style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
             <View
               style={{
                 height: 400,
@@ -300,8 +300,8 @@ const EnterPhoneNumber = ({navigation}) => {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : null}
-      style={{flex: 1}}>
-      <LinearGradient colors={[COLORS.white, COLORS.white]} style={{flex: 1}}>
+      style={{ flex: 1 }}>
+      <LinearGradient colors={[COLORS.white, COLORS.white]} style={{ flex: 1 }}>
         <ScrollView>
           <HeaderBar
             customContainerStyle={{

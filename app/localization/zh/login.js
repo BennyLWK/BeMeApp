@@ -14,4 +14,8 @@ export default {
   // Enter Phone Number
   enterPhoneNum: '请输入您的电话号码',
   continue: '继续',
+  // Enter Email
+  enterEmail: '请输入您的电邮',
+  emailGuideline: '',
+  continue: '继续',
 };

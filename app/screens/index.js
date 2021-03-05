@@ -6,6 +6,7 @@ import Inbox from './Inbox';
 import Profile from './Profile';
 import Booking from './Booking';
 import Login from './Login';
+import EnterEmail from './EnterEmail';
 
 export {
   AskDoctor,
@@ -16,4 +17,5 @@ export {
   Profile,
   Booking,
   Login,
+  EnterEmail,
 };
