@@ -8,7 +8,7 @@ export default {
   signInByEmail: 'Sign in by email',
 
   /* Expired Link request */
-  oppsSorry: 'opps Sorry!',
+  oppsSorry: 'Opps Sorry!',
   requestNewLink: 'Request a new link',
   requestLinkInfo: 'The link appears already expired and is no longer valid.',
 

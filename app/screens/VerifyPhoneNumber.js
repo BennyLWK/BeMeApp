@@ -19,9 +19,7 @@ import {COLORS, SIZES, FONTS, icons} from '../constants';
 
 const VerifyPhoneNumber = ({navigation}) => {
   const {t} = useTranslation();
-  {
-    /* Reuqest New Link prompt to server */
-  }
+  const [modalVisible, setModalVisible] = useState(false);
   const onPressVerifyPhoneNumber = () => {
     console.log('Verify Now');
   };
@@ -55,7 +53,7 @@ const VerifyPhoneNumber = ({navigation}) => {
             flexDirection: 'row',
           }}></View>
 
-        {/* Account Recovery Info */}
+        {/* Verify Phone Number Desc*/}
         <Text
           style={{
             ...FONTS.body2,

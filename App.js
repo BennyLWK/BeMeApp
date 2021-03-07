@@ -14,6 +14,7 @@ import {
   SignInByEmail,
   LinkExpired,
   GenderSelection,
+  VerifyPhoneNumber,
 } from './app/screens';
 import {CustomDrawerContent} from './app/components';
 import {SIZES} from './app/constants';
@@ -56,6 +57,7 @@ const App = () => {
         <Stack.Screen name="TroubleLogin" component={TroubleLogin} />
         <Stack.Screen name="LinkExpired" component={LinkExpired} />
         <Stack.Screen name="GenderSelection" component={GenderSelection} />
+        <Stack.Screen name="VerifyPhoneNumber" component={VerifyPhoneNumber} />
       </Stack.Navigator>
     </NavigationContainer>
   );

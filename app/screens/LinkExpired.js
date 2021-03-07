@@ -22,6 +22,8 @@ const LinkExpired = ({navigation}) => {
   {
     /* Reuqest New Link prompt to server */
   }
+
+  const [modalVisible, setModalVisible] = useState(false);
   const onPressRequestNewLink = () => {
     console.log('Request a new link');
   };
