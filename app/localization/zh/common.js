@@ -32,4 +32,5 @@ export default {
   blogging: '写播客',
   askQuestion: '去提问',
   applyCert: '申请认证',
+  logout: '退出',
 };

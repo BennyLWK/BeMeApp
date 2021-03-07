@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext, useState} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -13,24 +13,24 @@ import {useTranslation} from 'react-i18next';
 
 import {HeaderBar} from '../components';
 import {COLORS, FONTS, icons, images, SIZES} from '../constants';
+import {AuthContext} from '../navigation/AuthProvider';
 
 const Login = ({navigation}) => {
   const {t} = useTranslation();
+  const {fbLogin, googleLogin} = useContext(AuthContext);
 
   const LoginButton = ({
     customContainerStyle,
     customTextStyle,
     icon,
     label,
+    onPress,
   }) => {
     return (
       <TouchableOpacity
         activeOpacity={0.5}
         style={[styles.loginBtn, {...customContainerStyle}]}
-        onPress={() => {
-          console.log(label);
-          navigation.navigate('EnterPhoneNumber');
-        }}>
+        onPress={onPress}>
         <Image source={icon} style={styles.loginIcon} />
         <View style={styles.loginTextView}>
           <Text style={[styles.loginText, {...customTextStyle}]}>{label}</Text>
@@ -70,6 +70,10 @@ const Login = ({navigation}) => {
                     : t('login:googleLogin')
                 }
                 icon={Platform.OS === 'ios' ? icons.apple : icons.google}
+                onPress={() => {
+                  console.log('Apple/Google login');
+                  Platform.OS === 'ios' ? null : googleLogin();
+                }}
               />
 
               {/* Login with Facebook */}
@@ -80,6 +84,10 @@ const Login = ({navigation}) => {
                 }}
                 label={t('login:fbLogin')}
                 icon={icons.fb}
+                onPress={() => {
+                  console.log(t('login:fbLogin'));
+                  fbLogin();
+                }}
               />
 
               {/* Login with Phone Number */}
@@ -90,6 +98,9 @@ const Login = ({navigation}) => {
                 }}
                 label={t('login:phoneNumLogin')}
                 icon={icons.phone}
+                onPress={() => {
+                  navigation.navigate('EnterPhoneNumber');
+                }}
               />
 
               {/* Trouble Link */}
