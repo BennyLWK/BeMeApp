@@ -17,16 +17,13 @@ import LinearGradient from 'react-native-linear-gradient';
 import {HeaderBar} from '../components';
 import {COLORS, SIZES, FONTS, icons} from '../constants';
 
-const TroubleLogin = ({navigation, route}) => {
+const VerifyPhoneNumber = ({navigation}) => {
   const {t} = useTranslation();
-  const [AccountRecoveryInfo] = useState(t('troubleLogin:accountRecovery'));
-  const [selectedArea, setSelectedArea] = useState(null);
-  const [modalVisible, setModalVisible] = useState(false);
-  const email = route.params.email;
-  let isAccountRecovery = route.params.page == 'accountRecovery' ? true : false;
-
-  const onPressSignInWithEmail = () => {
-    navigation.navigate(isAccountRecovery ? 'SignInByEmail' : 'Login');
+  {
+    /* Reuqest New Link prompt to server */
+  }
+  const onPressVerifyPhoneNumber = () => {
+    console.log('Verify Now');
   };
 
   function renderInstruction() {
@@ -38,9 +35,7 @@ const TroubleLogin = ({navigation, route}) => {
           justifyContent: 'center',
         }}>
         <Text style={{...FONTS.body1, color: COLORS.textTitle}}>
-          {isAccountRecovery == true
-            ? t('troubleLogin:accountRecovery')
-            : t('checkYourEmail:checkYourEmail')}
+          {t('troubleLogin:verifyYourPhoneNumber')}
         </Text>
       </View>
     );
@@ -67,11 +62,7 @@ const TroubleLogin = ({navigation, route}) => {
             color: COLORS.displayText,
             textAlign: 'center',
           }}>
-          {isAccountRecovery == true
-            ? t('troubleLogin:accRecoveryInfo')
-            : t('checkYourEmail:confirmationEmail1') +
-              email +
-              t('checkYourEmail:confirmationEmail2')}
+          {t('troubleLogin:verifyPhoneNumberDesc')}
         </Text>
       </View>
     );
@@ -94,15 +85,13 @@ const TroubleLogin = ({navigation, route}) => {
             alignItems: 'center',
             justifyContent: 'center',
           }}
-          onPress={onPressSignInWithEmail}>
+          onPress={onPressVerifyPhoneNumber}>
           <Text
             style={{
               color: COLORS.white,
               ...FONTS.body1,
             }}>
-            {isAccountRecovery == true
-              ? t('troubleLogin:signInWithEmail')
-              : t('checkYourEmail:OK')}
+            {t('troubleLogin:verifyNow')}
           </Text>
         </TouchableOpacity>
       </View>
@@ -179,4 +168,4 @@ const TroubleLogin = ({navigation, route}) => {
   );
 };
 
-export default TroubleLogin;
+export default VerifyPhoneNumber;

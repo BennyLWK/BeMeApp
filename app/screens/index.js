@@ -10,6 +10,7 @@ import EnterEmail from './EnterEmail';
 import TroubleLogin from './TroubleLogin';
 import SignInByEmail from './SignInByEmail';
 import LinkExpired from './LinkExpired';
+import VerifyPhoneNumber from './VerifyPhoneNumber';
 
 export {
   AskDoctor,
@@ -23,5 +24,6 @@ export {
   EnterEmail,
   TroubleLogin,
   SignInByEmail,
-  LinkExpired
+  LinkExpired,
+  VerifyPhoneNumber,
 };

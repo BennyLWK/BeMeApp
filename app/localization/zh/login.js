@@ -15,7 +15,7 @@ export default {
   enterPhoneNum: '请输入您的电话号码',
   continue: '继续',
   // Enter Email
-  enterEmail: '请输入您的电邮',
-  emailGuideline: '',
+  enterEmail: '请输入您的电邮',  
+  emailGuideline: 'Get back access to your account, verify your email',
   continue: '继续',
 };
