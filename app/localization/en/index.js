@@ -11,5 +11,5 @@ export default {
   errorMessage,
   login,
   troubleLogin,
-  checkYourEmail
+  checkYourEmail,
 };
