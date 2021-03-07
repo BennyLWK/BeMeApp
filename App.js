@@ -5,7 +5,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 
 import Tabs from './app/navigation/tabs';
-import { Booking, EnterPhoneNumber, EnterEmail, Login } from './app/screens';
+import { Booking, EnterPhoneNumber, EnterEmail, Login, TroubleLogin, SignInByEmail, LinkExpired} from './app/screens';
 import { CustomDrawerContent } from './app/components';
 import { SIZES } from './app/constants';
 
@@ -43,6 +43,9 @@ const App = () => {
         <Stack.Screen name="Home" component={DrawerNavigator} />
         <Stack.Screen name="EnterPhoneNumber" component={EnterPhoneNumber} />
         <Stack.Screen name="EnterEmail" component={EnterEmail} />
+        <Stack.Screen name="SignInByEmail" component={SignInByEmail} />
+        <Stack.Screen name="TroubleLogin" component={TroubleLogin} />        
+        <Stack.Screen name="LinkExpired" component={LinkExpired} />
       </Stack.Navigator>
     </NavigationContainer>
   );

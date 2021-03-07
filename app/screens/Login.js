@@ -95,7 +95,15 @@ const Login = ({navigation}) => {
               {/* Trouble Link */}
               <TouchableOpacity
                 style={{marginBottom: SIZES.padding}}
-                onPress={() => console.log(t('login:trouble'))}>
+                onPress={() => {
+                  console.log(t('login:trouble'));
+                  navigation.navigate('TroubleLogin', 
+                  { 
+                    page : 'accountRecovery',
+                    email: ''
+
+                  });
+                }}>
                 <Text style={styles.troubleText}>{t('login:trouble')}</Text>
               </TouchableOpacity>
 
