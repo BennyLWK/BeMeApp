@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
   View,
   Text,
@@ -12,38 +12,45 @@ import {
   ScrollView,
   Platform,
 } from 'react-native';
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 import LinearGradient from 'react-native-linear-gradient';
 
-import { HeaderBar } from '../components';
-import { COLORS, SIZES, FONTS, icons } from '../constants';
+import {HeaderBar} from '../components';
+import {COLORS, SIZES, FONTS, icons} from '../constants';
 
-const EnterPhoneNumber = ({ navigation }) => {
+const SignInByEmail = ({navigation}) => {
   let textInput = useRef(null);
 
-  const { t } = useTranslation();
-  const maxLengthPhoneNum = 12;
+  const {t} = useTranslation();
+  const maxLengthEmail = 320;
   const [areas, setAreas] = useState([]);
   const [selectedArea, setSelectedArea] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [focusInput, setFocusInput] = useState(true);
-  const [phoneNumber, setPhoneNumber] = useState();
-  const [errorMsg, setErrorMsg] = useState();
+  const [email, setEmail] = useState();
+  const [errorValidate, setErrorValidate] = useState(true);
+  const [errorMsg, setErrorMsg] = useState(t('troubleLogin:emailSignInInfo'));
 
-  const onChangePhone = (number) => {
-    number.replace(/[^0-9]/g, '');
-    setPhoneNumber(number);
-    setErrorMsg('');
+  const onChangeEmail = (email) => {
+    email.replace(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, '');
+    setEmail(email);
+    setErrorValidate(true);
+    setErrorMsg(t('troubleLogin:emailSignInInfo'));
   };
 
   const onPressContinue = () => {
-    if (phoneNumber) {
-      if (phoneValidation(phoneNumber) === false) {
-        setPhoneNumber('');
-        setErrorMsg(t('errorMessage:invalidPhoneNum'));
+    if (email) {
+      if (emailValidation(email) === false) {
+        setEmail('');
+        setErrorMsg(t('errorMessage:invalidEmail'));
+        setErrorValidate(false);
       } else {
-        console.log('Phone Number: ' + selectedArea.callingCode + phoneNumber);
-        navigation.navigate('EnterEmail');
+        setErrorValidate(true);
+        console.log('Email: ' + email);
+        navigation.navigate('TroubleLogin', {
+          page: 'CheckYourEmail',
+          email: email,
+        });
       }
     }
   };
@@ -85,9 +92,9 @@ const EnterPhoneNumber = ({ navigation }) => {
       });
   }, []);
 
-  function phoneValidation(phoneNumber) {
-    const reg = /^[0-9]+$/;
-    if (reg.test(phoneNumber) === false) {
+  function emailValidation(email) {
+    const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (reg.test(email) === false) {
       return false;
     } else {
       return true;
@@ -102,8 +109,8 @@ const EnterPhoneNumber = ({ navigation }) => {
           alignItems: 'center',
           justifyContent: 'center',
         }}>
-        <Text style={{ ...FONTS.body1, color: COLORS.textTitle }}>
-          {t('login:enterPhoneNum')}
+        <Text style={{...FONTS.body1, color: COLORS.textTitle}}>
+          {t('troubleLogin:signInByEmail')}
         </Text>
       </View>
     );
@@ -117,63 +124,12 @@ const EnterPhoneNumber = ({ navigation }) => {
           marginTop: SIZES.padding * 4,
           marginHorizontal: SIZES.padding * 4,
         }}>
-        {/* Phone Number */}
+        {/* Email */}
         <View
           style={{
             flexDirection: 'row',
           }}>
-          {/* Country Code */}
-          <TouchableOpacity
-            style={{
-              width: 120,
-              height: 50,
-              alignItems: 'flex-end',
-              paddingBottom: 2,
-              marginHorizontal: SIZES.base,
-              borderBottomColor: COLORS.displayText,
-              borderBottomWidth: 1,
-              flexDirection: 'row',
-              ...FONTS.body2,
-            }}
-            onPress={() => setModalVisible(true)}>
-            <View style={{ justifyContent: 'center', marginLeft: SIZES.base }}>
-              <Image
-                source={{ uri: selectedArea?.flag }}
-                resizeMode="contain"
-                style={{
-                  width: 30,
-                  height: 30,
-                }}
-              />
-            </View>
-
-            <View
-              style={{
-                justifyContent: 'center',
-                marginLeft: SIZES.base,
-              }}>
-              <Text style={{ color: COLORS.textTitle, ...FONTS.body2 }}>
-                {selectedArea?.callingCode}
-              </Text>
-            </View>
-            <View
-              style={{
-                justifyContent: 'center',
-                marginBottom: SIZES.base,
-                marginLeft: SIZES.base,
-              }}>
-              <Image
-                source={icons.arrow_down}
-                style={{
-                  width: 10,
-                  height: 10,
-                  tintColor: COLORS.displayText,
-                }}
-              />
-            </View>
-          </TouchableOpacity>
-
-          {/* Phone Number */}
+          {/* Email input */}
           <TextInput
             ref={(input) => (textInput = input)}
             style={{
@@ -187,13 +143,13 @@ const EnterPhoneNumber = ({ navigation }) => {
               paddingBottom: 0,
               ...FONTS.body2,
             }}
-            keyboardType="phone-pad"
-            maxLength={maxLengthPhoneNum}
-            placeholder={t('login:enterPhoneNum')}
+            keyboardType="email-address"
+            placeholder={t('troubleLogin:enterEmail')}
+            maxLength={maxLengthEmail}
             placeholderTextColor={COLORS.displayText}
             selectionColor={COLORS.white}
-            value={phoneNumber}
-            onChangeText={onChangePhone}
+            value={email}
+            onChangeText={onChangeEmail}
             secureTextEntry={false}
             onFocus={onChangeFocus}
             onBlur={onChangeBlur}
@@ -205,7 +161,7 @@ const EnterPhoneNumber = ({ navigation }) => {
         {/* Error Message */}
         <Text
           style={{
-            color: COLORS.errorMsg,
+            color: errorValidate ? COLORS.displayText : COLORS.errorMsg,
             marginTop: SIZES.base,
             marginHorizontal: SIZES.padding,
             ...FONTS.body3,
@@ -228,7 +184,7 @@ const EnterPhoneNumber = ({ navigation }) => {
           style={{
             width: SIZES.width * 0.69,
             height: SIZES.height * 0.06,
-            backgroundColor: phoneNumber ? COLORS.primary : '#EFEFEF',
+            backgroundColor: email ? COLORS.primary : '#EFEFEF',
             borderRadius: SIZES.radius,
             alignItems: 'center',
             justifyContent: 'center',
@@ -236,7 +192,7 @@ const EnterPhoneNumber = ({ navigation }) => {
           onPress={onPressContinue}>
           <Text
             style={{
-              color: phoneNumber ? COLORS.white : COLORS.displayText,
+              color: email ? COLORS.white : COLORS.displayText,
               ...FONTS.body1,
             }}>
             {t('login:continue')}
@@ -247,23 +203,23 @@ const EnterPhoneNumber = ({ navigation }) => {
   }
 
   function renderAreaCodesModal() {
-    const renderItem = ({ item }) => {
+    const renderItem = ({item}) => {
       return (
         <TouchableOpacity
-          style={{ padding: SIZES.padding, flexDirection: 'row' }}
+          style={{padding: SIZES.padding, flexDirection: 'row'}}
           onPress={() => {
             setSelectedArea(item);
             setModalVisible(false);
           }}>
           <Image
-            source={{ uri: item.flag }}
+            source={{uri: item.flag}}
             style={{
               width: 30,
               height: 30,
               marginRight: 10,
             }}
           />
-          <Text style={{ ...FONTS.body4 }}>{item.name}</Text>
+          <Text style={{...FONTS.body4}}>{item.name}</Text>
         </TouchableOpacity>
       );
     };
@@ -272,7 +228,7 @@ const EnterPhoneNumber = ({ navigation }) => {
       <Modal animationType="slide" transparent={true} visible={modalVisible}>
         <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
           <View
-            style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
             <View
               style={{
                 height: 400,
@@ -300,8 +256,8 @@ const EnterPhoneNumber = ({ navigation }) => {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : null}
-      style={{ flex: 1 }}>
-      <LinearGradient colors={[COLORS.white, COLORS.white]} style={{ flex: 1 }}>
+      style={{flex: 1}}>
+      <LinearGradient colors={[COLORS.white, COLORS.white]} style={{flex: 1}}>
         <ScrollView>
           <HeaderBar
             customContainerStyle={{
@@ -318,4 +274,4 @@ const EnterPhoneNumber = ({ navigation }) => {
   );
 };
 
-export default EnterPhoneNumber;
+export default SignInByEmail;
