@@ -2,7 +2,16 @@ import React, {useState, useEffect} from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import AsyncStorage from '@react-native-community/async-storage';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
-import {EnterPhoneNumber, Login} from '../screens';
+import {
+  EnterEmail,
+  EnterPhoneNumber,
+  GenderSelection,
+  LinkExpired,
+  Login,
+  SignInByEmail,
+  TroubleLogin,
+  VerifyPhoneNumber,
+} from '../screens';
 
 const Stack = createStackNavigator();
 
@@ -42,6 +51,12 @@ const AuthStack = () => {
       initialRouteName={'Login'}>
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="EnterPhoneNumber" component={EnterPhoneNumber} />
+      <Stack.Screen name="EnterEmail" component={EnterEmail} />
+      <Stack.Screen name="SignInByEmail" component={SignInByEmail} />
+      <Stack.Screen name="TroubleLogin" component={TroubleLogin} />
+      <Stack.Screen name="LinkExpired" component={LinkExpired} />
+      <Stack.Screen name="GenderSelection" component={GenderSelection} />
+      <Stack.Screen name="VerifyPhoneNumber" component={VerifyPhoneNumber} />
     </Stack.Navigator>
   );
 };
