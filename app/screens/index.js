@@ -11,6 +11,7 @@ import TroubleLogin from './TroubleLogin';
 import SignInByEmail from './SignInByEmail';
 import LinkExpired from './LinkExpired';
 import VerifyPhoneNumber from './VerifyPhoneNumber';
+import GenderSelection from './GenderSelection';
 
 export {
   AskDoctor,
@@ -26,4 +27,5 @@ export {
   SignInByEmail,
   LinkExpired,
   VerifyPhoneNumber,
+  GenderSelection,
 };

@@ -75,7 +75,7 @@ const Tabs = () => {
         }}
       />
       <Tab.Screen
-        name="Aks Doctor"
+        name="Ask Doctor"
         component={AskDoctor}
         options={{
           tabBarIcon: ({focused}) => (

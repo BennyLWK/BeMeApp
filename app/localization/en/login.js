@@ -18,4 +18,9 @@ export default {
   enterEmail: 'Enter Email',
   emailGuideline: 'Get back access to your account, verify your email',
   continue: 'Continue',
+
+  //I am A
+  iAmA: 'I am a',
+  woman: 'Woman',
+  man: 'Man',
 };
