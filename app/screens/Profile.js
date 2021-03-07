@@ -1,13 +1,46 @@
-import React from 'react';
-import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import React, {useContext} from 'react';
+import {StyleSheet, View, Text, TouchableOpacity, Image} from 'react-native';
 import {useTranslation} from 'react-i18next';
+import {COLORS, FONTS, icons, SIZES} from '../constants';
+import {AuthContext} from '../navigation/AuthProvider';
 
 const Profile = ({navigation}) => {
   const {t} = useTranslation();
+  const {user, logout} = useContext(AuthContext);
+
+  const LogoutButton = ({
+    customContainerStyle,
+    customTextStyle,
+    label,
+    onPress,
+  }) => {
+    return (
+      <TouchableOpacity
+        activeOpacity={0.5}
+        style={[styles.logoutBtn, {...customContainerStyle}]}
+        onPress={onPress}>
+        <View style={styles.logoutTextView}>
+          <Text style={[styles.logoutText, {...customTextStyle}]}>{label}</Text>
+        </View>
+      </TouchableOpacity>
+    );
+  };
 
   return (
     <View style={styles.container}>
-      <Text>{t('common:profile')}</Text>
+      <Text>Name: {user.displayName}</Text>
+      <Text>Email: {user.email}</Text>
+      <LogoutButton
+        customContainerStyle={{
+          backgroundColor: COLORS.primary,
+          marginTop: SIZES.padding2 * 5,
+        }}
+        label={t('common:logout')}
+        onPress={() => {
+          console.log('Logout');
+          logout();
+        }}
+      />
     </View>
   );
 };
@@ -18,16 +51,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  shadow: {
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 4.65,
-
-    elevation: 8,
+  logoutBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderRadius: SIZES.radius,
+    height: SIZES.height * 0.06,
+    width: '69%',
+  },
+  logoutTextView: {
+    flex: 1,
+  },
+  logoutText: {
+    color: COLORS.white,
+    textAlign: 'center',
+    ...FONTS.body2,
   },
 });
 

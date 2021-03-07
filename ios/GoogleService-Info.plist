@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>1049925763841-7j8cc3l03m0usrp0970b7pvjfiu4vfim.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1049925763841-7j8cc3l03m0usrp0970b7pvjfiu4vfim</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>1049925763841-qlaam38a3f9481cuedqc0vo3pqctg58j.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBUXNpaZeM8vIp_J_EZEkzj6G3Hg2SiJE4</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1049925763841</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>biz.bellwood.bemeapp</string>
+	<key>PROJECT_ID</key>
+	<string>bemeapp-cafb5</string>
+	<key>STORAGE_BUCKET</key>
+	<string>bemeapp-cafb5.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1049925763841:ios:ca806eb81dcf5ba56a9100</string>
+</dict>
+</plist>

@@ -29,4 +29,5 @@ export default {
   blogging: 'Blogging',
   askQuestion: 'Ask Question',
   applyCert: 'Apply For Certification',
+  logout: 'Logout',
 };
