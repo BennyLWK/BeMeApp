@@ -2,6 +2,7 @@ import React, {createContext, useState} from 'react';
 import auth from '@react-native-firebase/auth';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {LoginManager, AccessToken} from 'react-native-fbsdk';
+import {appleAuth} from '@invertase/react-native-apple-authentication';
 
 export const AuthContext = createContext();
 
@@ -19,6 +20,69 @@ export const AuthProvider = ({children}) => {
           } catch (e) {
             console.log(e);
           }
+        },
+        appleLogin: async () => {
+          try {
+            console.log('start Apple Sign-In');
+            // Start the sign-in request
+            const appleAuthRequestResponse = await appleAuth.performRequest({
+              requestedOperation: appleAuth.Operation.LOGIN,
+              requestedScopes: [
+                appleAuth.Scope.EMAIL,
+                appleAuth.Scope.FULL_NAME,
+              ],
+            });
+
+            // Ensure Apple returned a user identityToken
+            if (!appleAuthRequestResponse.identityToken) {
+              throw 'Apple Sign-In failed - no identify token returned';
+            }
+            console.log(
+              'Apple identityToken => ',
+              appleAuthRequestResponse.identityToken,
+            );
+            // Create a Firebase credential from the response
+            const {identityToken, nonce} = appleAuthRequestResponse;
+            const appleCredential = auth.AppleAuthProvider.credential(
+              identityToken,
+              nonce,
+            );
+
+            // Sign-in the user with the credential
+            await auth()
+              .signInWithCredential(appleCredential)
+              // Use it only when user Sign's up,
+              // so create different social signup function
+              .then(() => {
+                //Once the user creation has happened successfully, we can add the currentUser into firestore
+                //with the appropriate details.
+                console.log('current User', auth().currentUser);
+                // firestore()
+                //   .collection('users')
+                //   .doc(auth().currentUser.uid)
+                //   .set({
+                //     fname: '',
+                //     lname: '',
+                //     email: auth().currentUser.email,
+                //     createdAt: firestore.Timestamp.fromDate(new Date()),
+                //     userImg: null,
+                //   })
+                //   //ensure we catch any errors at this stage to advise us if something does go wrong
+                //   .catch((error) => {
+                //     console.log(
+                //       'Something went wrong with added user to firestore: ',
+                //       error,
+                //     );
+                //   });
+              })
+              //we need to catch the whole sign up process if it fails too.
+              .catch((error) => {
+                console.log('Something went wrong with sign up: ', error);
+              });
+          } catch (error) {
+            console.log({error});
+          }
+          console.log('Apple login done');
         },
         googleLogin: async () => {
           try {
