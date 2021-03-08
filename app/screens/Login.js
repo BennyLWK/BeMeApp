@@ -17,7 +17,7 @@ import {AuthContext} from '../navigation/AuthProvider';
 
 const Login = ({navigation}) => {
   const {t} = useTranslation();
-  const {fbLogin, googleLogin} = useContext(AuthContext);
+  const {appleLogin, fbLogin, googleLogin} = useContext(AuthContext);
 
   const LoginButton = ({
     customContainerStyle,
@@ -72,7 +72,7 @@ const Login = ({navigation}) => {
                 icon={Platform.OS === 'ios' ? icons.apple : icons.google}
                 onPress={() => {
                   console.log('Apple/Google login');
-                  Platform.OS === 'ios' ? null : googleLogin();
+                  Platform.OS === 'ios' ? appleLogin() : googleLogin();
                 }}
               />
 
@@ -108,11 +108,9 @@ const Login = ({navigation}) => {
                 style={{marginBottom: SIZES.padding}}
                 onPress={() => {
                   console.log(t('login:trouble'));
-                  navigation.navigate('TroubleLogin', 
-                  { 
-                    page : 'accountRecovery',
-                    email: ''
-
+                  navigation.navigate('TroubleLogin', {
+                    page: 'accountRecovery',
+                    email: '',
                   });
                 }}>
                 <Text style={styles.troubleText}>{t('login:trouble')}</Text>

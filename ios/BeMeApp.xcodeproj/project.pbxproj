@@ -83,6 +83,7 @@
 		B1F091C037BDAB58845ACFA3 /* Pods-BeMeApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeMeApp.debug.xcconfig"; path = "Target Support Files/Pods-BeMeApp/Pods-BeMeApp.debug.xcconfig"; sourceTree = "<group>"; };
 		B212AD1525F2F4A0007F721C /* BeMeApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BeMeApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		B212AD1625F2F4A1007F721C /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		B21B30D325F5927F0087CB57 /* BeMeApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = BeMeApp.entitlements; path = BeMeApp/BeMeApp.entitlements; sourceTree = "<group>"; };
 		B2EAAFCB25F064BC004C57D7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B444A7D0BF1171C40BB81E17 /* libPods-BeMeApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BeMeApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6CD7382DEC5B38AACDB9059 /* libPods-BeMeApp-BeMeAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BeMeApp-BeMeAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -152,6 +153,7 @@
 		13B07FAE1A68108700A75B9A /* BeMeApp */ = {
 			isa = PBXGroup;
 			children = (
+				B21B30D325F5927F0087CB57 /* BeMeApp.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -742,6 +744,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = BeMeApp/BeMeApp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = DXU4VJ9QS7;
@@ -769,6 +772,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = BeMeApp/BeMeApp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = DXU4VJ9QS7;
