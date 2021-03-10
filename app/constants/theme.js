@@ -41,6 +41,9 @@ export const SIZES = {
   // app dimensions
   width,
   height,
+
+  // specific height for device
+  deviceHeight: 896,
 };
 
 export const FONTS = {
@@ -77,6 +80,7 @@ export const FONTS = {
   body3: {fontFamily: 'HelveticaNeue', fontSize: SIZES.body3, lineHeight: 22},
   body4: {fontFamily: 'HelveticaNeue', fontSize: SIZES.body4, lineHeight: 22},
   body5: {fontFamily: 'HelveticaNeue', fontSize: SIZES.body5, lineHeight: 22},
+  body6: {fontFamily: 'HelveticaNeue', fontSize: SIZES.h1, lineHeight: 22},
 };
 
 const appTheme = {COLORS, SIZES, FONTS};

@@ -10,8 +10,7 @@ import {
   Platform,
 } from 'react-native';
 import {useTranslation} from 'react-i18next';
-
-import {HeaderBar} from '../components';
+import {AnimatedBackground} from '../components';
 import {COLORS, FONTS, icons, images, SIZES} from '../constants';
 import {AuthContext} from '../navigation/AuthProvider';
 
@@ -41,16 +40,18 @@ const Login = ({navigation}) => {
 
   return (
     <View style={styles.container}>
+      <AnimatedBackground />
       <ImageBackground source={images.white_bg} style={styles.backgroundImage}>
         <SafeAreaView style={styles.containerSafeArea}>
-          <HeaderBar />
+          {/* <HeaderBar /> */}
           <View style={styles.containerView}>
             <Image
               source={images.beme_logo}
               style={{
                 width: SIZES.width * 0.38,
                 height: SIZES.height * 0.06,
-                marginTop: SIZES.height * 0.4,
+                marginTop:
+                  SIZES.height > SIZES.deviceHeight ? 360 : SIZES.height * 0.4,
               }}
             />
             {/* Logo Text */}
@@ -145,7 +146,7 @@ const Login = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.primary,
+    // backgroundColor: COLORS.primary,
   },
   backgroundImage: {
     flex: 1,
