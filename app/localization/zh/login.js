@@ -14,13 +14,17 @@ export default {
   // Enter Phone Number
   enterPhoneNum: '请输入您的电话号码',
   continue: '继续',
+
+  // Enter OTP
+  enterOTP: '请输入您的验证码',
+  resend: '重发',
+
   // Enter Email
   enterEmail: '请输入您的电邮',
-  emailGuideline: 'Get back access to your account, verify your email',
-  continue: '继续',
+  emailGuideline: '重新访问您的帐户，验证您的电子邮件。',
 
   //I am A
-  iAmA: 'I am a',
-  woman: 'Woman',
-  man: 'Man',
+  iAmA: '我是',
+  woman: '女生',
+  man: '男生',
 };

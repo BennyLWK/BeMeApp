@@ -14,10 +14,14 @@ export default {
   // Enter Phone Number
   enterPhoneNum: 'Enter phone number',
   continue: 'Continue',
+
+  // Enter OTP
+  enterOTP: 'Verify Code',
+  resend: 'Resend',
+
   // Enter Email
   enterEmail: 'Enter Email',
   emailGuideline: 'Get back access to your account, verify your email',
-  continue: 'Continue',
 
   //I am A
   iAmA: 'I am a',

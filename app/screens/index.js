@@ -1,6 +1,7 @@
 import AskDoctor from './AskDoctor';
 import Discover from './Discover';
 import EnterPhoneNumber from './EnterPhoneNumber';
+import EnterOTP from './EnterOTP';
 import Home from './Home';
 import Inbox from './Inbox';
 import Profile from './Profile';
@@ -17,6 +18,7 @@ export {
   AskDoctor,
   Discover,
   EnterPhoneNumber,
+  EnterOTP,
   Home,
   Inbox,
   Profile,

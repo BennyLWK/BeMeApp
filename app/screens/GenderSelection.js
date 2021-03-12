@@ -16,12 +16,10 @@ import {useTranslation} from 'react-i18next';
 import LinearGradient from 'react-native-linear-gradient';
 
 import {HeaderBar} from '../components';
-import {COLORS, SIZES, FONTS, icons} from '../constants';
+import {COLORS, SIZES, FONTS} from '../constants';
 
 const GenderSelection = ({navigation}) => {
   const {t} = useTranslation();
-  const [selectedArea, setSelectedArea] = useState(null);
-  const [modalVisible, setModalVisible] = useState(false);
   const [female, setFemale] = useState(false);
   const [male, setMale] = useState(false);
   const [selected, setSelected] = useState(false);
@@ -59,7 +57,7 @@ const GenderSelection = ({navigation}) => {
             alignItems: 'center',
             justifyContent: 'center',
             borderWidth: 1,
-            marginBottom: 30,
+            marginBottom: SIZES.padding,
           }}
           onPress={() => {
             setMale(false);
@@ -127,56 +125,6 @@ const GenderSelection = ({navigation}) => {
       </View>
     );
   }
-  function renderButton() {}
-  function renderAreaCodesModal() {
-    const renderItem = ({item}) => {
-      return (
-        <TouchableOpacity
-          style={{padding: SIZES.padding, flexDirection: 'row'}}
-          onPress={() => {
-            setSelectedArea(item);
-            setModalVisible(false);
-          }}>
-          <Image
-            source={{uri: item.flag}}
-            style={{
-              width: 30,
-              height: 30,
-              marginRight: 10,
-            }}
-          />
-          <Text style={{...FONTS.body4}}>{item.name}</Text>
-        </TouchableOpacity>
-      );
-    };
-
-    return (
-      <Modal animationType="slide" transparent={true} visible={modalVisible}>
-        <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
-          <View
-            style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-            <View
-              style={{
-                height: 400,
-                width: SIZES.width * 0.8,
-                backgroundColor: COLORS.titleBg,
-                borderRadius: SIZES.radius,
-              }}>
-              <FlatList
-                renderItem={renderItem}
-                keyExtractor={(item) => item.code}
-                showsVerticalScrollIndicator={false}
-                style={{
-                  padding: SIZES.padding * 2,
-                  marginBottom: SIZES.padding * 2,
-                }}
-              />
-            </View>
-          </View>
-        </TouchableWithoutFeedback>
-      </Modal>
-    );
-  }
 
   return (
     <KeyboardAvoidingView
@@ -191,11 +139,9 @@ const GenderSelection = ({navigation}) => {
           />
           {renderInstruction()}
           {renderForm()}
-          {renderButton()}
         </ScrollView>
         {renderFooterButton()}
       </LinearGradient>
-      {renderAreaCodesModal()}
     </KeyboardAvoidingView>
   );
 };
