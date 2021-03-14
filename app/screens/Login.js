@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -10,6 +10,8 @@ import {
   Platform,
 } from 'react-native';
 import {useTranslation} from 'react-i18next';
+import auth from '@react-native-firebase/auth';
+
 import {AnimatedBackground} from '../components';
 import {COLORS, FONTS, icons, images, SIZES} from '../constants';
 import {AuthContext} from '../navigation/AuthProvider';
@@ -17,6 +19,24 @@ import {AuthContext} from '../navigation/AuthProvider';
 const Login = ({navigation}) => {
   const {t} = useTranslation();
   const {appleLogin, fbLogin, googleLogin} = useContext(AuthContext);
+
+  const {user, setUser} = useContext(AuthContext);
+  const [initializing, setInitializing] = useState(true);
+
+  const onAuthStateChanged = (user) => {
+    setUser(user);
+    console.log('onAuthStateChanged => ' + user);
+
+    if (user) {
+      console.log('navigate to EnterPhoneNumber after login');
+      navigation.navigate('EnterPhoneNumber');
+    }
+  };
+
+  useEffect(() => {
+    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+    return subscriber; // unsubscribe on unmount
+  }, []);
 
   const LoginButton = ({
     customContainerStyle,
@@ -146,7 +166,6 @@ const Login = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: COLORS.primary,
   },
   backgroundImage: {
     flex: 1,
@@ -179,7 +198,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: SIZES.radius,
     height: SIZES.height * 0.06,
-    width: '69%',
+    width: '76%',
   },
   loginIcon: {
     marginLeft: SIZES.padding * 2,

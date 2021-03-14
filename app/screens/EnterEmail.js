@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import {
   View,
   Text,
@@ -13,11 +13,13 @@ import LinearGradient from 'react-native-linear-gradient';
 
 import {HeaderBar} from '../components';
 import {COLORS, SIZES, FONTS, icons} from '../constants';
+import {AuthContext} from '../navigation/AuthProvider';
 
 const EnterEmail = ({navigation}) => {
   let textInput = useRef(null);
 
   const {t} = useTranslation();
+  const {user} = useContext(AuthContext);
   const maxLengthEmail = 320;
   const [focusInput, setFocusInput] = useState(true);
   const [email, setEmail] = useState();
@@ -55,6 +57,9 @@ const EnterEmail = ({navigation}) => {
 
   useEffect(() => {
     textInput.focus();
+    {
+      user && user.email ? setEmail(user.email) : null;
+    }
   }, []);
 
   function emailValidation(email) {

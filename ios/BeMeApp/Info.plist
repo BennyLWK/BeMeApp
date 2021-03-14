@@ -69,21 +69,13 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string/>
 	<key>UIAppFonts</key>
 	<array>
-		<string>HelveticaNeuBold.ttf</string>
-		<string>HelveticaNeue.ttf</string>
-		<string>HelveticaNeueBd.ttf</string>
-		<string>HelveticaNeueBlackCond.ttf</string>
-		<string>HelveticaNeueHv.ttf</string>
-		<string>HelveticaNeueIt.ttf</string>
-		<string>HelveticaNeueLight.ttf</string>
-		<string>HelveticaNeueLt.ttf</string>
-		<string>HelveticaNeueMed.ttf</string>
-		<string>HelveticaNeueMedium.ttf</string>
-		<string>HelveticaNeueThin.ttf</string>
-		<string>HelveticaNeueBold.ttf</string>
+		<string>Roboto-Black.ttf</string>
+		<string>Roboto-Bold.ttf</string>
+		<string>Roboto-Medium.ttf</string>
+		<string>Roboto-Regular.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
@@ -94,8 +86,7 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
