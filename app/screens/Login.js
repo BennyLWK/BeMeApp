@@ -198,7 +198,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: SIZES.radius,
     height: SIZES.height * 0.06,
-    width: '69%',
+    width: '76%',
   },
   loginIcon: {
     marginLeft: SIZES.padding * 2,
