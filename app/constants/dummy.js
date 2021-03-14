@@ -250,19 +250,19 @@ const sideMenu = [
     id: 3,
     name: 'common:blogging',
     icon: icons.btn_blogging,
-    screenName: 'Login',
+    screenName: 'Booking',
   },
   {
     id: 4,
     name: 'common:askQuestion',
     icon: icons.btn_question,
-    screenName: 'Login',
+    screenName: 'Booking',
   },
   {
     id: 5,
     name: 'common:applyCert',
     icon: icons.btn_verify,
-    screenName: 'Login',
+    screenName: 'Booking',
   },
 ];
 

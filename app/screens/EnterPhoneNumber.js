@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import {
   View,
   Text,
@@ -17,11 +17,13 @@ import LinearGradient from 'react-native-linear-gradient';
 
 import {HeaderBar} from '../components';
 import {COLORS, SIZES, FONTS, icons} from '../constants';
+import {AuthContext} from '../navigation/AuthProvider';
 
 const EnterPhoneNumber = ({navigation}) => {
   let textInput = useRef(null);
 
   const {t} = useTranslation();
+  const {user, logout} = useContext(AuthContext);
   const maxLengthPhoneNum = 12;
   const [areas, setAreas] = useState([]);
   const [selectedArea, setSelectedArea] = useState(null);
@@ -87,6 +89,13 @@ const EnterPhoneNumber = ({navigation}) => {
         }
       });
   }, []);
+
+  function onBackPress() {
+    if (user) {
+      console.log('logout since log in credential exist');
+      logout();
+    }
+  }
 
   function phoneValidation(phoneNumber) {
     const reg = /^[0-9]+$/;
@@ -309,6 +318,9 @@ const EnterPhoneNumber = ({navigation}) => {
           <HeaderBar
             customContainerStyle={{
               marginTop: Platform.OS === 'ios' ? SIZES.padding * 5 : 0,
+            }}
+            onBackPress={() => {
+              onBackPress();
             }}
           />
           {renderInstruction()}

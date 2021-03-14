@@ -28,8 +28,8 @@ const Profile = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <Text>Name: {user.displayName}</Text>
-      <Text>Email: {user.email}</Text>
+      {user && user.displayName ? <Text>Name: {user.displayName}</Text> : null}
+      {user && user.email ? <Text>Email: {user.email}</Text> : null}
       <LogoutButton
         customContainerStyle={{
           backgroundColor: COLORS.primary,

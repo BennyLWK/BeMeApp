@@ -4,7 +4,7 @@ import {useNavigation} from '@react-navigation/native';
 
 import {COLORS, SIZES, icons} from '../constants';
 
-const HeaderBar = ({customContainerStyle, right}) => {
+const HeaderBar = ({customContainerStyle, onBackPress, right}) => {
   const navigation = useNavigation();
 
   return (
@@ -21,7 +21,12 @@ const HeaderBar = ({customContainerStyle, right}) => {
             flexDirection: 'row',
             alignItems: 'center',
           }}
-          onPress={() => navigation.goBack()}>
+          onPress={() => {
+            {
+              onBackPress && onBackPress();
+            }
+            navigation.goBack();
+          }}>
           <Image
             source={icons.back}
             resizeMode="contain"

@@ -3,14 +3,9 @@ import {
   View,
   Text,
   TouchableOpacity,
-  TouchableWithoutFeedback,
-  Image,
-  Modal,
-  FlatList,
   KeyboardAvoidingView,
   ScrollView,
   Platform,
-  StyleSheet,
 } from 'react-native';
 import {useTranslation} from 'react-i18next';
 import LinearGradient from 'react-native-linear-gradient';
@@ -23,6 +18,10 @@ const GenderSelection = ({navigation}) => {
   const [female, setFemale] = useState(false);
   const [male, setMale] = useState(false);
   const [selected, setSelected] = useState(false);
+
+  const onPressContinue = () => {
+    navigation.navigate('App');
+  };
 
   function renderInstruction() {
     return (
@@ -112,7 +111,8 @@ const GenderSelection = ({navigation}) => {
             borderRadius: SIZES.radius,
             alignItems: 'center',
             justifyContent: 'center',
-          }}>
+          }}
+          onPress={onPressContinue}>
           <Text
             style={{
               color: COLORS.white,
