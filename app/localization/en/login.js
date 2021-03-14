@@ -23,6 +23,9 @@ export default {
   enterEmail: 'Enter Email',
   emailGuideline: 'Get back access to your account, verify your email',
 
+  // Enter DOB
+  myDOB: 'My birthday is',
+
   //I am A
   iAmA: 'I am a',
   woman: 'Woman',

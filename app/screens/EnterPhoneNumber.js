@@ -149,14 +149,17 @@ const EnterPhoneNumber = ({navigation}) => {
             }}
             onPress={() => setModalVisible(true)}>
             <View style={{justifyContent: 'center', marginLeft: SIZES.base}}>
-              <Image
+              <Text style={{color: COLORS.textTitle, ...FONTS.body2}}>
+                {selectedArea?.code}
+              </Text>
+              {/* <Image
                 source={{uri: selectedArea?.flag}}
                 resizeMode="contain"
                 style={{
                   width: 30,
                   height: 30,
                 }}
-              />
+              /> */}
             </View>
 
             <View
@@ -168,6 +171,7 @@ const EnterPhoneNumber = ({navigation}) => {
                 {selectedArea?.callingCode}
               </Text>
             </View>
+
             <View
               style={{
                 justifyContent: 'center',

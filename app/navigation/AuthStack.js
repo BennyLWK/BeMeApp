@@ -3,6 +3,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import AsyncStorage from '@react-native-community/async-storage';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {
+  EnterDOB,
   EnterEmail,
   EnterOTP,
   EnterPhoneNumber,
@@ -54,6 +55,7 @@ const AuthStack = () => {
       <Stack.Screen name="EnterPhoneNumber" component={EnterPhoneNumber} />
       <Stack.Screen name="EnterOTP" component={EnterOTP} />
       <Stack.Screen name="EnterEmail" component={EnterEmail} />
+      <Stack.Screen name="EnterDOB" component={EnterDOB} />
       <Stack.Screen name="SignInByEmail" component={SignInByEmail} />
       <Stack.Screen name="TroubleLogin" component={TroubleLogin} />
       <Stack.Screen name="LinkExpired" component={LinkExpired} />

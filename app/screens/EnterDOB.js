@@ -14,55 +14,15 @@ import LinearGradient from 'react-native-linear-gradient';
 import {HeaderBar} from '../components';
 import {COLORS, SIZES, FONTS} from '../constants';
 
-const EnterOTP = ({navigation}) => {
+const EnterDOB = ({navigation}) => {
   const {t} = useTranslation();
-  const defaultCountdown = 60;
-  const lengthInput = 6;
+  const lengthInput = 8;
   const [internalVal, setInternalVal] = useState('');
-  const [countdown, setCountdown] = useState(defaultCountdown);
-  const [enableResend, setEnableResend] = useState(false);
 
   let textInput = useRef(null);
   let clockCall = null;
 
-  useEffect(() => {
-    fetch('https://bemeauthservice.azurewebsites.net/api/requestotp?type=0', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        phoneCountryCode: '+60',
-        phoneNumber: '5212650',
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-      });
-  }, []);
-
-  useEffect(() => {
-    clockCall = setInterval(() => {
-      decrementClock();
-    }, 1000);
-    return () => {
-      clearInterval(clockCall);
-    };
-  });
-
-  const decrementClock = () => {
-    if (countdown === 0) {
-      setEnableResend(true);
-      setCountdown(0);
-      clearInterval(clockCall);
-    } else {
-      setCountdown(countdown - 1);
-    }
-  };
-
-  const onOtpChange = (value) => {
+  const onDOBChange = (value) => {
     if (isNaN(Number(value))) {
       // do nothing when a non digit is pressed
       return;
@@ -70,25 +30,14 @@ const EnterOTP = ({navigation}) => {
     setInternalVal(value);
   };
 
-  const onResendOTP = () => {
-    if (enableResend) {
-      setCountdown(defaultCountdown);
-      setEnableResend(false);
-      clearInterval(clockCall);
-      clockCall = setInterval(() => {
-        decrementClock();
-      }, 1000);
-    }
-  };
-
   useEffect(() => {
     textInput.focus();
   }, []);
 
   const onPressContinue = () => {
-    if (internalVal && internalVal.length > 5) {
+    if (internalVal && internalVal.length > lengthInput - 1) {
       setInternalVal('');
-      navigation.navigate('EnterEmail');
+      navigation.navigate('GenderSelection');
     }
   };
 
@@ -101,7 +50,7 @@ const EnterOTP = ({navigation}) => {
           justifyContent: 'center',
         }}>
         <Text style={{...FONTS.body1, color: COLORS.textTitle}}>
-          {t('login:enterOTP')}
+          {t('login:myDOB')}
         </Text>
       </View>
     );
@@ -115,7 +64,7 @@ const EnterOTP = ({navigation}) => {
           marginTop: SIZES.padding * 4,
           marginHorizontal: SIZES.padding * 4,
         }}>
-        {/* OTP */}
+        {/* DOB */}
         <View
           style={{
             flexDirection: 'row',
@@ -124,12 +73,16 @@ const EnterOTP = ({navigation}) => {
           }}>
           <TextInput
             ref={(input) => (textInput = input)}
-            onChangeText={onOtpChange}
-            style={{width: 0, height: 0}}
+            onChangeText={onDOBChange}
+            style={{
+              width: 0,
+              height: 0,
+            }}
             value={internalVal}
             maxLength={lengthInput}
             returnKeyType="done"
             keyboardType="numeric"
+            placeholder="DDMMYYYY"
           />
           <View
             style={{
@@ -143,9 +96,8 @@ const EnterOTP = ({navigation}) => {
                 <View
                   key={index}
                   style={{
-                    backgroundColor: COLORS.titleBg,
                     paddingVertical: 1,
-                    width: 40,
+                    width: 20,
                     height: 50,
                     margin: 5,
                     justifyContent: 'center',
@@ -162,7 +114,7 @@ const EnterOTP = ({navigation}) => {
                       alignItems: 'flex-end',
                       justifyContent: 'flex-end',
                       paddingTop: 10,
-                      ...FONTS.body6,
+                      ...FONTS.body2,
                     }}
                     onPress={() => textInput.focus()}>
                     {internalVal && internalVal.length > 0
@@ -171,43 +123,31 @@ const EnterOTP = ({navigation}) => {
                   </Text>
                 </View>
               ))}
-          </View>
-        </View>
-        {/* Resend Button & Countdown Timer View */}
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'center',
-            marginTop: SIZES.padding2,
-          }}>
-          <View style={{}}>
             <Text
               style={{
-                alignItems: 'center',
-                color: COLORS.subtitle,
+                color: COLORS.displayText,
+                marginTop: SIZES.padding * 0,
+                marginHorizontal: SIZES.padding,
+                position: 'absolute',
+                left: 50,
+                top: 20,
                 ...FONTS.body3,
               }}>
-              {new Date(1000 * countdown).toISOString().substr(14, 5)}
+              {'/             /'}
             </Text>
           </View>
-          {/* Resend Button */}
-          <TouchableOpacity onPress={onResendOTP}>
-            <View
-              style={{
-                alignItems: 'center',
-                marginLeft: SIZES.base,
-              }}>
-              <Text
-                style={{
-                  alignItems: 'center',
-                  color: enableResend ? COLORS.primary : COLORS.displayText,
-                  ...FONTS.body3,
-                }}>
-                {t('login:resend')}
-              </Text>
-            </View>
-          </TouchableOpacity>
         </View>
+
+        <Text
+          style={{
+            color: COLORS.displayText,
+            marginTop: SIZES.padding2,
+            marginHorizontal: SIZES.padding,
+            textAlign: 'center',
+            ...FONTS.body3,
+          }}>
+          DD/MM/YYYY
+        </Text>
       </View>
     );
   }
@@ -225,7 +165,7 @@ const EnterOTP = ({navigation}) => {
             width: SIZES.width * 0.69,
             height: SIZES.height * 0.06,
             backgroundColor:
-              internalVal && internalVal.length > 5
+              internalVal && internalVal.length > lengthInput - 1
                 ? COLORS.primary
                 : '#EFEFEF',
             borderRadius: SIZES.radius,
@@ -236,7 +176,7 @@ const EnterOTP = ({navigation}) => {
           <Text
             style={{
               color:
-                internalVal && internalVal.length > 5
+                internalVal && internalVal.length > lengthInput - 1
                   ? COLORS.white
                   : COLORS.displayText,
               ...FONTS.body1,
@@ -268,4 +208,4 @@ const EnterOTP = ({navigation}) => {
   );
 };
 
-export default EnterOTP;
+export default EnterDOB;
