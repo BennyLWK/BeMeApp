@@ -1,12 +1,14 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {StyleSheet, View, Text, TouchableOpacity, Image} from 'react-native';
 import {useTranslation} from 'react-i18next';
-import {COLORS, FONTS, icons, SIZES} from '../constants';
+import auth from '@react-native-firebase/auth';
+
+import {COLORS, FONTS, SIZES} from '../constants';
 import {AuthContext} from '../navigation/AuthProvider';
 
 const Profile = ({navigation}) => {
   const {t} = useTranslation();
-  const {user, logout} = useContext(AuthContext);
+  const {user, setUser, logout} = useContext(AuthContext);
 
   const LogoutButton = ({
     customContainerStyle,
@@ -26,6 +28,19 @@ const Profile = ({navigation}) => {
     );
   };
 
+  const onAuthStateChanged = (user) => {
+    setUser(user);
+
+    if (!user) {
+      navigation.navigate('Login');
+    }
+  };
+
+  useEffect(() => {
+    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+    return subscriber; // unsubscribe on unmount
+  }, []);
+
   return (
     <View style={styles.container}>
       {user && user.displayName ? <Text>Name: {user.displayName}</Text> : null}
@@ -37,8 +52,11 @@ const Profile = ({navigation}) => {
         }}
         label={t('common:logout')}
         onPress={() => {
-          console.log('Logout');
-          logout();
+          if (user) {
+            logout();
+          } else {
+            navigation.navigate('Login');
+          }
         }}
       />
     </View>
