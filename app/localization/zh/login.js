@@ -23,6 +23,9 @@ export default {
   enterEmail: '请输入您的电邮',
   emailGuideline: '重新访问您的帐户，验证您的电子邮件。',
 
+  // Enter DOB
+  myDOB: '我的生日',
+
   //I am A
   iAmA: '我是',
   woman: '女生',

@@ -42,7 +42,7 @@ const EnterEmail = ({navigation}) => {
       } else {
         setErrorValidate(true);
         console.log('Email: ' + email);
-        navigation.navigate('GenderSelection');
+        navigation.navigate('EnterDOB');
       }
     }
   };
