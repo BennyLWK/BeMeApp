@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 class ServiceUtil {
-  base_url = 'https://bemeauthservice.azurewebsites.net/';
+  base_url = 'https://bemeauthservice.azurewebsites.net';
 
   post(path, params) {
     return this.send(path, 'POST', null, params);
@@ -64,7 +64,7 @@ class ServiceUtil {
           }
           // Possible 401 or other network error
           return response.json().then((errorResponse) => {
-            logError(errorResponse);
+            // logError(errorResponse);
             reject(errorResponse);
           });
         })
@@ -74,7 +74,7 @@ class ServiceUtil {
           resolve(responseData);
         })
         .catch((error) => {
-          logError(error);
+          // logError(error);
           const customError = this.getErrorMessageForResponce(error);
           reject(new Error(customError));
         });
@@ -138,20 +138,6 @@ class ServiceUtil {
     }
     return false;
   }
-
-  getMagentoVersion = async () => {
-    try {
-      const response = await fetch(`${this.base_url}magento_version`);
-      const text = await response.text();
-      const number = parseNumber(text);
-      this.version = `${number}`;
-
-      return number;
-    } catch (error) {
-      logError(error);
-      return false;
-    }
-  };
 
   makeParams = ({sort, page, pageSize, filter}) => {
     let index = 0;

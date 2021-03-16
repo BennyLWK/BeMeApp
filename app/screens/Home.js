@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   SafeAreaView,
   View,
@@ -8,6 +8,8 @@ import {
   Image,
   RefreshControl,
   FlatList,
+  BackHandler,
+  Alert,
 } from 'react-native';
 import {useTranslation} from 'react-i18next';
 import Carousel from 'react-native-banner-carousel';
@@ -21,6 +23,27 @@ const Home = ({navigation}) => {
 
   const [selectedCategory, setSelectedCategory] = React.useState(null);
   const [refreshing, setRefreshing] = React.useState(false);
+
+  useEffect(() => {
+    const backAction = () => {
+      Alert.alert('', t('homePage:exitApp'), [
+        {
+          text: t('common:cancel'),
+          onPress: () => null,
+          style: 'cancel',
+        },
+        {text: t('common:yes'), onPress: () => BackHandler.exitApp()},
+      ]);
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    );
+
+    return () => backHandler.remove();
+  }, []);
 
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);

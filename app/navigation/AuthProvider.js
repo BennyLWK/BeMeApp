@@ -26,7 +26,6 @@ export const AuthProvider = ({children}) => {
         appleLogin: async () => {
           try {
             authStore.loginType = 3;
-            console.log('start Apple Sign-In');
             // Start the sign-in request
             const appleAuthRequestResponse = await appleAuth.performRequest({
               requestedOperation: appleAuth.Operation.LOGIN,
@@ -40,10 +39,8 @@ export const AuthProvider = ({children}) => {
             if (!appleAuthRequestResponse.identityToken) {
               throw 'Apple Sign-In failed - no identify token returned';
             }
-            console.log(
-              'Apple identityToken => ',
-              appleAuthRequestResponse.identityToken,
-            );
+            authStore.authToken = appleAuthRequestResponse.identityToken;
+
             // Create a Firebase credential from the response
             const {identityToken, nonce} = appleAuthRequestResponse;
             const appleCredential = auth.AppleAuthProvider.credential(
@@ -90,10 +87,9 @@ export const AuthProvider = ({children}) => {
         googleLogin: async () => {
           try {
             authStore.loginType = 1;
-            console.log('start google login');
             // Get the users ID token
             const {idToken} = await GoogleSignin.signIn();
-            console.log('Google idToken => ', idToken);
+            authStore.authToken = idToken;
             // Create a Google credential with the token
             const googleCredential = auth.GoogleAuthProvider.credential(
               idToken,

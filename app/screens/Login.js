@@ -11,11 +11,13 @@ import {
 } from 'react-native';
 import {useTranslation} from 'react-i18next';
 import auth from '@react-native-firebase/auth';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import {AnimatedBackground} from '../components';
 import {COLORS, FONTS, icons, images, SIZES} from '../constants';
 import {AuthContext} from '../navigation/AuthProvider';
 import {authStore} from '../model';
+import {authenticate} from '../service/GuestAPI';
 
 const Login = ({navigation}) => {
   const {t} = useTranslation();
@@ -24,26 +26,38 @@ const Login = ({navigation}) => {
   const {user, setUser} = useContext(AuthContext);
   const [initializing, setInitializing] = useState(true);
 
-  const onAuthStateChanged = (user) => {
-    setUser(user);
-    console.log('onAuthStateChanged => ' + user);
+  // const onAuthStateChanged = async (user) => {
+  //   setUser(user);
+  //   console.log('onAuthStateChanged => ' + user);
 
-    if (user) {
-      if (user && user.email) {
-        authStore.email = user.email;
-      }
-      if (user && user.displayName) {
-        authStore.userName = user.displayName;
-      }
-      console.log('navigate to EnterPhoneNumber after login');
-      navigation.navigate('EnterPhoneNumber');
-    }
-  };
+  //   // if (user) {
+  //   //   if (user && user.email) {
+  //   //     authStore.email = user.email;
+  //   //   }
+  //   //   if (user && user.displayName) {
+  //   //     authStore.userName = user.displayName;
+  //   //   }
+  //   //   console.log('Result before authenticate @ Login: ');
+  //   //   let result = await authenticate(authStore.loginType, authStore.authToken);
+  //   //   console.log('Result authenticate @ Login: ', result);
 
-  useEffect(() => {
-    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-    return subscriber; // unsubscribe on unmount
-  }, []);
+  //   //   if (result.responseCode === '0000') {
+  //   //     console.log('navigate to Home after authentication');
+  //   //     AsyncStorage.setItem('ACCESS_TOKEN', result.accessToken);
+  //   //     navigation.navigate('App');
+  //   //   } else if (result.responseCode === '0001') {
+  //   //     console.log('navigate to EnterPhoneNumber since new user');
+  //   //     navigation.navigate('EnterPhoneNumber');
+  //   //   } else {
+  //   //     console.log('system error');
+  //   //   }
+  //   // }
+  // };
+
+  // useEffect(() => {
+  //   const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+  //   return subscriber; // unsubscribe on unmount
+  // }, []);
 
   const LoginButton = ({
     customContainerStyle,

@@ -33,4 +33,6 @@ export default {
   askQuestion: '去提问',
   applyCert: '申请认证',
   logout: '退出',
+  yes: '确定',
+  cancel: '取消',
 };

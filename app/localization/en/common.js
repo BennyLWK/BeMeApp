@@ -30,4 +30,6 @@ export default {
   askQuestion: 'Ask Question',
   applyCert: 'Apply For Certification',
   logout: 'Logout',
+  yes: 'YES',
+  cancel: 'Cancel',
 };

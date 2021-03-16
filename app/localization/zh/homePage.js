@@ -26,4 +26,5 @@ export default {
   proOrganizations: '专业机构',
   eliteDoctors: '精英名医',
   popular: '热门',
+  exitApp: '确认退出应用吗？',
 };

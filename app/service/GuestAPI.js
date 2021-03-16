@@ -1,20 +1,5 @@
 import {svcUtil} from './ServiceUtil';
 
-// export default (service) => ({
-//   create: (email, phoneCountryCode, phoneNumber) => {
-//     const data = {
-//       email,
-//       phoneCountryCode,
-//       phoneNumber,
-//     };
-//     if (email) {
-//       const path = '/api/create';
-//       return service.post(path, data);
-//     }
-//     throw new Error('Email is required!');
-//   },
-// });
-
 export const create = (email, phoneCountryCode, phoneNumber) => {
   const data = {
     email,
@@ -27,4 +12,17 @@ export const create = (email, phoneCountryCode, phoneNumber) => {
     return svcUtil.post(path, data);
   }
   throw new Error('Email is required!');
+};
+
+export const authenticate = (loginType, authToken) => {
+  const data = {
+    loginType,
+    authToken,
+  };
+  if (authToken) {
+    console.log('data @ authenticate: ', data);
+    const path = '/api/authenticate';
+    return svcUtil.post(path, data);
+  }
+  throw new Error('authToken is required!');
 };
