@@ -4,6 +4,8 @@ import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {LoginManager, AccessToken} from 'react-native-fbsdk';
 import {appleAuth} from '@invertase/react-native-apple-authentication';
 
+import {authStore} from '../model';
+
 export const AuthContext = createContext();
 
 export const AuthProvider = ({children}) => {
@@ -23,6 +25,7 @@ export const AuthProvider = ({children}) => {
         },
         appleLogin: async () => {
           try {
+            authStore.loginType = 3;
             console.log('start Apple Sign-In');
             // Start the sign-in request
             const appleAuthRequestResponse = await appleAuth.performRequest({
@@ -86,6 +89,7 @@ export const AuthProvider = ({children}) => {
         },
         googleLogin: async () => {
           try {
+            authStore.loginType = 1;
             console.log('start google login');
             // Get the users ID token
             const {idToken} = await GoogleSignin.signIn();
@@ -133,6 +137,7 @@ export const AuthProvider = ({children}) => {
         },
         fbLogin: async () => {
           try {
+            authStore.loginType = 2;
             // Attempt login with permissions
             const result = await LoginManager.logInWithPermissions([
               'public_profile',

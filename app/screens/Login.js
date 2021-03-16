@@ -15,6 +15,7 @@ import auth from '@react-native-firebase/auth';
 import {AnimatedBackground} from '../components';
 import {COLORS, FONTS, icons, images, SIZES} from '../constants';
 import {AuthContext} from '../navigation/AuthProvider';
+import {authStore} from '../model';
 
 const Login = ({navigation}) => {
   const {t} = useTranslation();
@@ -28,6 +29,12 @@ const Login = ({navigation}) => {
     console.log('onAuthStateChanged => ' + user);
 
     if (user) {
+      if (user && user.email) {
+        authStore.email = user.email;
+      }
+      if (user && user.displayName) {
+        authStore.userName = user.displayName;
+      }
       console.log('navigate to EnterPhoneNumber after login');
       navigation.navigate('EnterPhoneNumber');
     }
@@ -120,6 +127,7 @@ const Login = ({navigation}) => {
                 label={t('login:phoneNumLogin')}
                 icon={icons.phone}
                 onPress={() => {
+                  authStore.loginType = 0;
                   navigation.navigate('EnterPhoneNumber');
                 }}
               />
