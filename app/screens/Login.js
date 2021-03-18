@@ -141,8 +141,8 @@ const Login = ({navigation}) => {
                 label={t('login:phoneNumLogin')}
                 icon={icons.phone}
                 onPress={() => {
-                  authStore.loginType = 0;
-                  navigation.navigate('EnterPhoneNumber');
+                  // authStore.loginType = 0;
+                  // navigation.navigate('EnterPhoneNumber');
                 }}
               />
 
