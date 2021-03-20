@@ -3,7 +3,7 @@ import {View, Image, Text, StyleSheet} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {useTranslation} from 'react-i18next';
 
-import {AskDoctor, Discover, Home, Inbox, Profile} from '../screens';
+import {AskDoctor, Discover, Home, Promotion, Profile} from '../screens';
 import {COLORS, FONTS, icons, SIZES} from '../constants';
 
 const Tab = createBottomTabNavigator();
@@ -51,13 +51,13 @@ const Tabs = () => {
         }}
       />
       <Tab.Screen
-        name="Discover"
-        component={Discover}
+        name="Promotion"
+        component={Promotion}
         options={{
           tabBarIcon: ({focused}) => (
             <View style={{alignItems: 'center', justifyContent: 'center'}}>
               <Image
-                source={focused ? icons.discover_active : icons.discover}
+                source={focused ? icons.promotion_active : icons.promotion}
                 resizeMode="contain"
                 style={[styles.imageStyle]}
               />
@@ -68,7 +68,7 @@ const Tabs = () => {
                     color: focused ? COLORS.primary : COLORS.textTitle,
                   },
                 ]}>
-                {t('common:discover')}
+                {t('common:promotion')}
               </Text>
             </View>
           ),
@@ -99,13 +99,13 @@ const Tabs = () => {
         }}
       />
       <Tab.Screen
-        name="Inbox"
-        component={Inbox}
+        name="Discover"
+        component={Discover}
         options={{
           tabBarIcon: ({focused}) => (
             <View style={{alignItems: 'center', justifyContent: 'center'}}>
               <Image
-                source={focused ? icons.inbox_active : icons.inbox}
+                source={focused ? icons.discover_active : icons.discover}
                 resizeMode="contain"
                 style={[styles.imageStyle]}
               />
@@ -116,7 +116,7 @@ const Tabs = () => {
                     color: focused ? COLORS.primary : COLORS.textTitle,
                   },
                 ]}>
-                {t('common:inbox')}
+                {t('common:discover')}
               </Text>
             </View>
           ),

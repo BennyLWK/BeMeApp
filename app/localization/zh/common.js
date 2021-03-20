@@ -1,8 +1,8 @@
 export default {
   home: '首页',
+  promotion: 'Promotion',
   discover: '发现',
   askDoctor: '问医生',
-  inbox: '消息',
   profile: '我的',
   adTitle1:
     '【热拉提】热拉提plus+复合水光（3ml菲洛嘉+2ml润月雅），一提一嫩，老态拜拜',

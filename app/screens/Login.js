@@ -89,7 +89,7 @@ const Login = ({navigation}) => {
             <Image
               source={images.beme_logo}
               style={{
-                width: SIZES.width * 0.38,
+                width: SIZES.width * 0.48,
                 height: SIZES.height * 0.06,
                 marginTop:
                   SIZES.height > SIZES.deviceHeight ? 360 : SIZES.height * 0.4,

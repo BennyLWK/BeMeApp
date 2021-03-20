@@ -1,8 +1,8 @@
 export default {
   home: 'Home',
+  promotion: 'Promotion',
   discover: 'Discover',
-  askDoctor: 'Ask Doctor',
-  inbox: 'Inbox',
+  askDoctor: 'Doctor/Clinic',
   profile: 'My Profile',
   adTitle1: 'Facial Treatment Essence (Pitera™ Essence)',
   adClinic1: 'Kuala Lumpur Hospital',
