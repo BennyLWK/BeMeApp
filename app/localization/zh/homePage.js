@@ -27,4 +27,7 @@ export default {
   eliteDoctors: '精英名医',
   popular: '热门',
   exitApp: '确认退出应用吗？',
+  clinic: 'Clinic',
+  more: 'More',
+  doctor: 'Doctor',
 };

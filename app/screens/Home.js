@@ -20,7 +20,7 @@ import {dummyData, icons, images, SIZES, COLORS, FONTS} from '../constants';
 
 const Home = ({navigation}) => {
   const {t} = useTranslation();
-
+  const highestRate = 5;
   const [selectedCategory, setSelectedCategory] = React.useState(null);
   const [refreshing, setRefreshing] = React.useState(false);
 
@@ -236,6 +236,404 @@ const Home = ({navigation}) => {
     );
   }
 
+  function renderClinic() {
+    const renderClinicItem = ({item}) => {
+      return (
+        <View
+          style={{
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginHorizontal: 5,
+            paddingVertical: SIZES.base,
+            borderColor: COLORS.titleBg,
+            borderRadius: SIZES.base,
+            borderWidth: 0.5,
+            width: SIZES.width * 0.26,
+          }}>
+          {/* Image View */}
+          <View
+            style={{
+              alignItems: 'center',
+              justifyContent: 'center',
+              borderColor: COLORS.titleBg,
+              borderRadius: 50,
+              borderWidth: 1,
+            }}>
+            <Image
+              source={item.img}
+              style={{
+                width: SIZES.width * 0.12,
+                height: SIZES.width * 0.12,
+              }}
+            />
+          </View>
+          {/* Clinic Name */}
+          <Text
+            numberOfLines={2}
+            style={{
+              width: SIZES.width * 0.2,
+              textAlign: 'center',
+              color: COLORS.textTitle,
+              ...FONTS.body5,
+              lineHeight: SIZES.body3,
+              marginTop: SIZES.base,
+            }}>
+            {item.name}
+          </Text>
+          {/* Rating View */}
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginTop: 5,
+            }}>
+            {Array(item.rate)
+              .fill()
+              .map((data, index) => (
+                <View
+                  key={index}
+                  style={{
+                    margin: 1,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                  <Image
+                    source={icons.icn_rating_active}
+                    resizeMode="contain"
+                    style={{
+                      width: 15,
+                      height: 15,
+                    }}
+                  />
+                </View>
+              ))}
+          </View>
+          {/* Like View */}
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            <TouchableOpacity
+              style={{
+                left: 7,
+              }}
+              onPress={() => {
+                console.log('Likes ' + item.name + ' on pressed');
+              }}>
+              <Image
+                source={item.liked ? icons.like_active : icons.like}
+                resizeMode="contain"
+                style={{
+                  width: 15,
+                  height: 15,
+                }}
+              />
+            </TouchableOpacity>
+            <Text
+              numberOfLines={1}
+              style={{
+                width: SIZES.width * 0.15,
+                textAlign: 'left',
+                color: COLORS.textTitle,
+                marginLeft: 12,
+                ...FONTS.body5,
+              }}>
+              {item.likes} Likes
+            </Text>
+          </View>
+        </View>
+      );
+    };
+
+    return (
+      <View
+        style={{
+          backgroundColor: COLORS.white,
+          paddingBottom: SIZES.base,
+          width: SIZES.width,
+          marginLeft: -10,
+        }}>
+        <View
+          style={{
+            marginTop: SIZES.base,
+            marginHorizontal: SIZES.padding,
+          }}>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+            }}>
+            {/* Title View */}
+            <View
+              style={{
+                flexDirection: 'row',
+              }}>
+              <Image
+                source={icons.icn_clinic}
+                resizeMode="contain"
+                style={{
+                  width: 20,
+                  height: 20,
+                }}
+              />
+              <Text
+                style={{
+                  color: COLORS.textTitle,
+                  marginLeft: SIZES.padding,
+                  ...FONTS.body3,
+                }}>
+                {t('homePage:clinic')}
+              </Text>
+            </View>
+            {/* More Button */}
+            <TouchableOpacity
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+              }}
+              onPress={() => {
+                console.log('More on Clinic pressed');
+              }}>
+              <Text
+                style={{
+                  color: COLORS.primary,
+                  marginRight: 3,
+                  ...FONTS.body4,
+                }}>
+                {t('homePage:more')}
+              </Text>
+              <Image
+                source={icons.more}
+                resizeMode="contain"
+                style={{
+                  width: 10,
+                  height: 10,
+                }}
+              />
+            </TouchableOpacity>
+          </View>
+
+          <View style={{marginTop: SIZES.base}}>
+            <FlatList
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              data={dummyData.clinic}
+              keyExtractor={(item) => item.id.toString()}
+              renderItem={renderClinicItem}
+            />
+          </View>
+        </View>
+      </View>
+    );
+  }
+
+  function renderDoctor() {
+    const renderDoctorItem = ({item}) => {
+      return (
+        <View
+          style={{
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginHorizontal: 5,
+            paddingVertical: SIZES.base,
+            borderColor: COLORS.titleBg,
+            borderRadius: SIZES.base,
+            borderWidth: 0.5,
+            width: SIZES.width * 0.26,
+          }}>
+          {/* Image View */}
+          <View
+            style={{
+              alignItems: 'center',
+              justifyContent: 'center',
+              borderColor: COLORS.titleBg,
+              borderRadius: 50,
+              borderWidth: 1,
+            }}>
+            <Image
+              source={item.img}
+              style={{
+                width: SIZES.width * 0.12,
+                height: SIZES.width * 0.12,
+              }}
+            />
+          </View>
+          {/* Doctor Name */}
+          <Text
+            numberOfLines={1}
+            style={{
+              width: SIZES.width * 0.2,
+              textAlign: 'center',
+              color: COLORS.textTitle,
+              ...FONTS.body5,
+              lineHeight: SIZES.body3,
+              marginTop: SIZES.base,
+            }}>
+            {item.name}
+          </Text>
+          {/* Doctor Description */}
+          <Text
+            numberOfLines={1}
+            style={{
+              width: SIZES.width * 0.2,
+              textAlign: 'center',
+              color: COLORS.subtitle,
+              ...FONTS.body5,
+              fontSize: SIZES.padding,
+            }}>
+            {item.description}
+          </Text>
+          {/* Rate */}
+          <Text
+            style={{
+              textAlign: 'center',
+              color: '#FFAC00',
+              ...FONTS.title4,
+            }}>
+            {item.rate.toFixed(1)}
+          </Text>
+          {/* Rating View */}
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            {/* Active */}
+            {Array(item.rate)
+              .fill()
+              .map((data, index) => (
+                <View
+                  key={index}
+                  style={{
+                    margin: 1,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                  <Image
+                    source={icons.icn_rating_active}
+                    resizeMode="contain"
+                    style={{
+                      width: 15,
+                      height: 15,
+                    }}
+                  />
+                </View>
+              ))}
+            {/* Inactive */}
+            {Array(highestRate - item.rate)
+              .fill()
+              .map((data, index) => (
+                <View
+                  key={index}
+                  style={{
+                    margin: 1,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                  <Image
+                    source={icons.icn_rating_deactive}
+                    resizeMode="contain"
+                    style={{
+                      width: 15,
+                      height: 15,
+                    }}
+                  />
+                </View>
+              ))}
+          </View>
+        </View>
+      );
+    };
+
+    return (
+      <View
+        style={{
+          backgroundColor: COLORS.white,
+          paddingBottom: SIZES.base,
+          width: SIZES.width,
+          marginLeft: -10,
+          marginTop: SIZES.padding,
+        }}>
+        <View
+          style={{
+            marginTop: SIZES.base,
+            marginHorizontal: SIZES.padding,
+          }}>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+            }}>
+            {/* Title View */}
+            <View
+              style={{
+                flexDirection: 'row',
+              }}>
+              <Image
+                source={icons.icn_doctor}
+                resizeMode="contain"
+                style={{
+                  width: 20,
+                  height: 20,
+                }}
+              />
+              <Text
+                style={{
+                  color: COLORS.textTitle,
+                  marginLeft: SIZES.padding,
+                  ...FONTS.body3,
+                }}>
+                {t('homePage:doctor')}
+              </Text>
+            </View>
+            {/* More Button */}
+            <TouchableOpacity
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+              }}
+              onPress={() => {
+                console.log('More on Doctor pressed');
+              }}>
+              <Text
+                style={{
+                  color: COLORS.primary,
+                  marginRight: 3,
+                  ...FONTS.body4,
+                }}>
+                {t('homePage:more')}
+              </Text>
+              <Image
+                source={icons.more}
+                resizeMode="contain"
+                style={{
+                  width: 10,
+                  height: 10,
+                }}
+              />
+            </TouchableOpacity>
+          </View>
+
+          <View style={{marginTop: SIZES.base}}>
+            <FlatList
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              data={dummyData.doctor}
+              keyExtractor={(item) => item.id.toString()}
+              renderItem={renderDoctorItem}
+            />
+          </View>
+        </View>
+      </View>
+    );
+  }
+
   function renderBanners() {
     const ImageTextButton = ({customContainerStyle, image, label, onPress}) => {
       return (
@@ -323,15 +721,12 @@ const Home = ({navigation}) => {
   }
 
   function renderComponents() {
-    console.log(
-      'SIZES => width: ' + SIZES.width + ' & height: ' + SIZES.height,
-    );
-    console.log();
     const HeaderComponent = () => (
       <View>
         {renderService()}
         {renderScanEngine()}
-        {renderBanners()}
+        {renderClinic()}
+        {renderDoctor()}
       </View>
     );
 

@@ -44,6 +44,15 @@ const medical_health = require('../assets/icons/medical_health.png');
 const anti_aging = require('../assets/icons/anti_aging.png');
 const other = require('../assets/icons/other.png');
 
+// Home
+const more = require('../assets/icons/more.png');
+const icn_clinic = require('../assets/icons/icn_clinic.png');
+const icn_doctor = require('../assets/icons/icn_doctor.png');
+const icn_rating_active = require('../assets/icons/icn_rating_active.png');
+const icn_rating_deactive = require('../assets/icons/icn_rating_deactive.png');
+const like = require('../assets/icons/like.png');
+const like_active = require('../assets/icons/like_active.png');
+
 // Side Menu
 const btn_booking = require('../assets/icons/btn_booking.png');
 const btn_diary = require('../assets/icons/btn_diary.png');
@@ -107,4 +116,11 @@ export default {
   google,
   phone,
   arrow_down,
+  more,
+  icn_clinic,
+  icn_doctor,
+  icn_rating_active,
+  icn_rating_deactive,
+  like,
+  like_active,
 };

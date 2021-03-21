@@ -4,6 +4,7 @@ import auth from '@react-native-firebase/auth';
 import {createStackNavigator} from '@react-navigation/stack';
 import AsyncStorage from '@react-native-community/async-storage';
 
+import {SIZES} from '../constants';
 import {AuthContext} from './AuthProvider';
 import AuthStack from './AuthStack';
 import AppStack from './AppStack';
@@ -11,6 +12,7 @@ import AppStack from './AppStack';
 const Stack = createStackNavigator();
 
 const Routes = () => {
+  console.log('SIZES => width: ' + SIZES.width + ' & height: ' + SIZES.height);
   let routeName;
   const {user, setUser} = useContext(AuthContext);
   const [isFirstLaunch, setIsFirstLaunch] = useState(null);

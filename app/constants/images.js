@@ -25,6 +25,16 @@ const model14 = require('../assets/images/model14.png');
 const organizations = require('../assets/images/organizations.png');
 const white_bg = require('../assets/images/white_bg.png');
 
+// Clinic
+const clinic1 = require('../assets/images/clinic1.png');
+const clinic2 = require('../assets/images/clinic2.png');
+const clinic3 = require('../assets/images/clinic3.png');
+
+// Doctor
+const doctor1 = require('../assets/images/doctor1.png');
+const doctor2 = require('../assets/images/doctor2.png');
+const doctor3 = require('../assets/images/doctor3.png');
+
 export default {
   banner1,
   banner2,
@@ -52,4 +62,10 @@ export default {
   model14,
   organizations,
   white_bg,
+  clinic1,
+  clinic2,
+  clinic3,
+  doctor1,
+  doctor2,
+  doctor3,
 };

@@ -266,6 +266,72 @@ const sideMenu = [
   },
 ];
 
+const clinic = [
+  {
+    id: 1,
+    name: 'DR.KO Skin Specialist',
+    img: images.clinic1,
+    rate: 4,
+    likes: 888,
+    liked: false,
+  },
+  {
+    id: 2,
+    name: 'Kalo Cosmetic Surgery',
+    img: images.clinic2,
+    rate: 3,
+    likes: 4576,
+    liked: false,
+  },
+  {
+    id: 3,
+    name: 'Promenade Plastic Surgery',
+    img: images.clinic3,
+    rate: 5,
+    likes: 124,
+    liked: true,
+  },
+  {
+    id: 4,
+    name: 'DR.KO Skin Specialist',
+    img: images.clinic1,
+    rate: 2,
+    likes: 333,
+    liked: false,
+  },
+];
+
+const doctor = [
+  {
+    id: 1,
+    name: 'Dr. Jest Wong',
+    description: 'Jest Experct Clinic',
+    img: images.doctor1,
+    rate: 5,
+  },
+  {
+    id: 2,
+    name: 'Dr. Eric Wong',
+    description: 'Eric Plastic Surgery Clinic',
+    img: images.doctor2,
+    rate: 3,
+  },
+  {
+    id: 3,
+    name: 'Dr. Sam Winchester',
+    description: 'Sam Experct Clinic',
+    img: images.doctor3,
+    rate: 4,
+  },
+  {
+    id: 4,
+    name: 'Dr. Jack Liew',
+    description: 'Jack Plastic Surgery',
+    img: images.doctor1,
+    rate: 5,
+  },
+];
+
 const dummyData = {
   advertisement,
   categoryService1,
@@ -273,6 +339,8 @@ const dummyData = {
   categoryScanEngine,
   model,
   sideMenu,
+  clinic,
+  doctor,
 };
 
 export default dummyData;
