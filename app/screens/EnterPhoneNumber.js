@@ -18,6 +18,8 @@ import LinearGradient from 'react-native-linear-gradient';
 import {HeaderBar} from '../components';
 import {COLORS, SIZES, FONTS, icons} from '../constants';
 import {AuthContext} from '../navigation/AuthProvider';
+import {create} from '../service/GuestAPI';
+import {authStore} from '../model';
 
 const EnterPhoneNumber = ({navigation}) => {
   let textInput = useRef(null);
@@ -41,8 +43,16 @@ const EnterPhoneNumber = ({navigation}) => {
     setErrorMsg('');
   };
 
-  const onPressContinue = () => {
+  const onPressContinue = async () => {
     if (phoneNumber) {
+      authStore.phoneCountryCode = selectedArea.callingCode;
+      authStore.phoneNumber = phoneNumber;
+      let result = await create(
+        authStore.email,
+        authStore.phoneCountryCode,
+        authStore.phoneNumber,
+      );
+      console.log('Result @ phoneNumber: ' + result);
       if (phoneValidation(phoneNumber) === false) {
         setPhoneNumber('');
         setErrorMsg(t('errorMessage:invalidPhoneNum'));

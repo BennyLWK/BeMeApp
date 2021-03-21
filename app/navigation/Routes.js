@@ -2,7 +2,9 @@ import React, {useContext, useState, useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import auth from '@react-native-firebase/auth';
 import {createStackNavigator} from '@react-navigation/stack';
+import AsyncStorage from '@react-native-community/async-storage';
 
+import {SIZES} from '../constants';
 import {AuthContext} from './AuthProvider';
 import AuthStack from './AuthStack';
 import AppStack from './AppStack';
@@ -10,13 +12,14 @@ import AppStack from './AppStack';
 const Stack = createStackNavigator();
 
 const Routes = () => {
+  console.log('SIZES => width: ' + SIZES.width + ' & height: ' + SIZES.height);
+  let routeName;
   const {user, setUser} = useContext(AuthContext);
-  const [initializing, setInitializing] = useState(true);
+  const [isFirstLaunch, setIsFirstLaunch] = useState(null);
 
   const onAuthStateChanged = (user) => {
     setUser(user);
     console.log('onAuthStateChanged => ' + user);
-    if (initializing) setInitializing(false);
   };
 
   useEffect(() => {
@@ -24,19 +27,44 @@ const Routes = () => {
     return subscriber; // unsubscribe on unmount
   }, []);
 
-  if (initializing) return null;
+  useEffect(() => {
+    AsyncStorage.getItem('ACCESS_TOKEN').then((value) => {
+      if (value == null) {
+        console.log('No access_token');
+        setIsFirstLaunch(true);
+      } else {
+        console.log('access_token: ', value);
+        console.log('navigate to Home page');
+        setIsFirstLaunch(false);
+      }
+    }); // Add some error handling, also you can simply do setIsFirstLaunch(null)
+  }, []);
+
+  if (isFirstLaunch === null) {
+    /**
+     * This is the 'tricky' part: The query to AsyncStorage is not finished,
+     * so you can also put a placeholder of some sort, but effectively the interval
+     * between the first mount and AsyncStorage retrieving your data won't be noticeable
+     * to the user. But if you want to display anything then you can use a LOADER here
+     **/
+    return null;
+  } else if (isFirstLaunch == true) {
+    routeName = 'Auth';
+  } else {
+    routeName = 'App';
+  }
 
   return (
     <NavigationContainer>
-      {/* {user ? <AppStack /> : <AuthStack />} */}
-      <Stack.Navigator
+      {user ? <AppStack /> : <AuthStack />}
+      {/* <Stack.Navigator
         screenOptions={{
           headerShown: false,
         }}
-        initialRouteName={'Auth'}>
+        initialRouteName={routeName}>
         <Stack.Screen name="App" component={AppStack} />
         <Stack.Screen name="Auth" component={AuthStack} />
-      </Stack.Navigator>
+      </Stack.Navigator> */}
     </NavigationContainer>
   );
 };

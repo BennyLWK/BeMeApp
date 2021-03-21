@@ -4,6 +4,8 @@ import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {LoginManager, AccessToken} from 'react-native-fbsdk';
 import {appleAuth} from '@invertase/react-native-apple-authentication';
 
+import {authStore} from '../model';
+
 export const AuthContext = createContext();
 
 export const AuthProvider = ({children}) => {
@@ -23,7 +25,7 @@ export const AuthProvider = ({children}) => {
         },
         appleLogin: async () => {
           try {
-            console.log('start Apple Sign-In');
+            authStore.loginType = 3;
             // Start the sign-in request
             const appleAuthRequestResponse = await appleAuth.performRequest({
               requestedOperation: appleAuth.Operation.LOGIN,
@@ -37,10 +39,8 @@ export const AuthProvider = ({children}) => {
             if (!appleAuthRequestResponse.identityToken) {
               throw 'Apple Sign-In failed - no identify token returned';
             }
-            console.log(
-              'Apple identityToken => ',
-              appleAuthRequestResponse.identityToken,
-            );
+            authStore.authToken = appleAuthRequestResponse.identityToken;
+
             // Create a Firebase credential from the response
             const {identityToken, nonce} = appleAuthRequestResponse;
             const appleCredential = auth.AppleAuthProvider.credential(
@@ -86,10 +86,10 @@ export const AuthProvider = ({children}) => {
         },
         googleLogin: async () => {
           try {
-            console.log('start google login');
+            authStore.loginType = 1;
             // Get the users ID token
             const {idToken} = await GoogleSignin.signIn();
-            console.log('Google idToken => ', idToken);
+            authStore.authToken = idToken;
             // Create a Google credential with the token
             const googleCredential = auth.GoogleAuthProvider.credential(
               idToken,
@@ -133,6 +133,7 @@ export const AuthProvider = ({children}) => {
         },
         fbLogin: async () => {
           try {
+            authStore.loginType = 2;
             // Attempt login with permissions
             const result = await LoginManager.logInWithPermissions([
               'public_profile',

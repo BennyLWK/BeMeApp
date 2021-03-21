@@ -4,6 +4,7 @@ import EnterPhoneNumber from './EnterPhoneNumber';
 import EnterOTP from './EnterOTP';
 import EnterDOB from './EnterDOB';
 import Home from './Home';
+import Promotion from './Promotion';
 import Inbox from './Inbox';
 import Profile from './Profile';
 import Booking from './Booking';
@@ -22,6 +23,7 @@ export {
   EnterOTP,
   EnterDOB,
   Home,
+  Promotion,
   Inbox,
   Profile,
   Booking,

@@ -3,12 +3,12 @@ const back = require('../assets/icons/back.png');
 // Tab
 const home = require('../assets/icons/home.png');
 const home_active = require('../assets/icons/home_active.png');
-const discover = require('../assets/icons/discover.png');
-const discover_active = require('../assets/icons/discover_active.png');
+const promotion = require('../assets/icons/promotion.png');
+const promotion_active = require('../assets/icons/promotion_active.png');
 const doctor = require('../assets/icons/doctor.png');
 const doctor_active = require('../assets/icons/doctor_active.png');
-const inbox = require('../assets/icons/inbox.png');
-const inbox_active = require('../assets/icons/inbox_active.png');
+const discover = require('../assets/icons/discover.png');
+const discover_active = require('../assets/icons/discover_active.png');
 const profile = require('../assets/icons/profile.png');
 const profile_active = require('../assets/icons/profile_active.png');
 
@@ -43,6 +43,15 @@ const semi_makeup = require('../assets/icons/semi_makeup.png');
 const medical_health = require('../assets/icons/medical_health.png');
 const anti_aging = require('../assets/icons/anti_aging.png');
 const other = require('../assets/icons/other.png');
+
+// Home
+const more = require('../assets/icons/more.png');
+const icn_clinic = require('../assets/icons/icn_clinic.png');
+const icn_doctor = require('../assets/icons/icn_doctor.png');
+const icn_rating_active = require('../assets/icons/icn_rating_active.png');
+const icn_rating_deactive = require('../assets/icons/icn_rating_deactive.png');
+const like = require('../assets/icons/like.png');
+const like_active = require('../assets/icons/like_active.png');
 
 // Side Menu
 const btn_booking = require('../assets/icons/btn_booking.png');
@@ -82,12 +91,12 @@ export default {
   back,
   home,
   home_active,
+  promotion,
+  promotion_active,
   discover,
   discover_active,
   doctor,
   doctor_active,
-  inbox,
-  inbox_active,
   profile,
   profile_active,
   btn_Menu,
@@ -107,4 +116,11 @@ export default {
   google,
   phone,
   arrow_down,
+  more,
+  icn_clinic,
+  icn_doctor,
+  icn_rating_active,
+  icn_rating_deactive,
+  like,
+  like_active,
 };

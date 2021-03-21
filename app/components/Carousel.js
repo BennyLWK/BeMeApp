@@ -4,7 +4,7 @@ import {View, ScrollView, Text, StyleSheet} from 'react-native';
 import FlatListView from './FlatListView';
 import {COLORS} from '../constants';
 
-export const Carousel = (props: any) => {
+export const Carousel = (props) => {
   const {items, style} = props;
   const itemsPerInterval =
     props.itemsPerInterval === undefined ? 1 : props.itemsPerInterval;
@@ -13,7 +13,7 @@ export const Carousel = (props: any) => {
   const [intervals, setIntervals] = React.useState(1);
   const [width, setWidth] = React.useState(0);
 
-  const init = (width: number) => {
+  const init = (width) => {
     // initialise width
     setWidth(width);
     // initialise total intervals
@@ -21,7 +21,7 @@ export const Carousel = (props: any) => {
     setIntervals(Math.ceil(totalItems / itemsPerInterval));
   };
 
-  const getInterval = (offset: any) => {
+  const getInterval = (offset) => {
     for (let i = 1; i <= intervals; i++) {
       if (offset + 1 < (width / intervals) * i) {
         return i;
@@ -39,6 +39,7 @@ export const Carousel = (props: any) => {
         key={i}
         style={{
           ...styles.bullet,
+          color: COLORS.primary,
           opacity: interval === i ? 0.5 : 0.1,
         }}>
         &bull;
@@ -63,7 +64,7 @@ export const Carousel = (props: any) => {
         scrollEventThrottle={200}
         pagingEnabled
         decelerationRate="fast">
-        {items.map((item: any, index: number) => {
+        {items.map((item, index) => {
           switch (style) {
             default:
               return <FlatListView key={`list${item.id}`} data={item.data} />;

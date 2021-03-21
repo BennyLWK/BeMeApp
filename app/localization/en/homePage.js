@@ -26,4 +26,8 @@ export default {
   proOrganizations: 'Professional\nOrganizations',
   eliteDoctors: 'Elite Doctors',
   popular: 'Popular',
+  exitApp: 'Are you sure you want to exit?',
+  clinic: 'Clinic',
+  more: 'More',
+  doctor: 'Doctor',
 };
